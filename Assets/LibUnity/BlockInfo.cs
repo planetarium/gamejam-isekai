@@ -39,6 +39,6 @@ public class BlockInfo : MonoBehaviour
     private void UpdateText()
     {
         Debug.Log("UpdateText");
-        informationText.text = $"Block index [{_blockIndex}] / Hash: [{_hash.ToString()}]";;
+        informationText.text = $"Block index : <color=#FF0000>{_blockIndex}</color> / Hash: <color=#FF0000>{_hash.ToString()}</color>";;
     }
 }

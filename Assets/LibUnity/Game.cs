@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.IO;
 using Boscohyun;
+using Libplanet.Crypto;
 using LibUnity.Frontend.BlockChain;
 using LibUnity.Frontend.State;
 using UnityEngine;
@@ -76,13 +77,19 @@ namespace LibUnity.Frontend
 
         private IEnumerator CoLogin(Action<bool> callback)
         {
+            
+            Agent.Initialize(
+                _options,
+                new PrivateKey(),
+                callback
+            );
             yield break;
+
 //             if (_options.Maintenance)
 //             {
 //                 var w = Widget.Create<SystemPopup>();
 //                 w.CloseCallback = () =>
 //                 {
-//                     Application.OpenURL(GameConfig.DiscordLink);
 // #if UNITY_EDITOR
 //                     UnityEditor.EditorApplication.ExitPlaymode();
 // #else
@@ -137,7 +144,7 @@ namespace LibUnity.Frontend
 //
 //             Agent.Initialize(
 //                 _options,
-//                 loginPopup.GetPrivateKey(),
+//                 new PrivateKey(),
 //                 callback
 //             );
         }
