@@ -68,9 +68,7 @@ namespace LibUnity.Frontend
             {
                 IsInitialized = true;
             }
-            else
-            {
-            }
+            ActionManager.SignUp();
         }
 
   
