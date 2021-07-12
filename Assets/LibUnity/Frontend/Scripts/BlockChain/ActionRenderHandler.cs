@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+using LibUnity.Backend.Action;
 using LibUnity.Backend.Renderer;
+using LibUnity.Backend.State;
 using LibUnity.Frontend.Extensions;
+using UnityEngine;
 
 namespace LibUnity.Frontend.BlockChain
 {
@@ -31,11 +34,18 @@ namespace LibUnity.Frontend.BlockChain
         public void Start(ActionRenderer renderer)
         {
             _renderer = renderer;
+            _renderer.EveryRender<SignUp>().Subscribe(RenderSignUp);
         }
 
         public void Stop()
         {
             _disposables.DisposeAllAndClear();
+        }
+
+        private void RenderSignUp(BaseAction.ActionEvaluation<SignUp> eval)
+        {
+            var agent = eval.OutputStates.GetState(Game.Instance.Agent.Address);
+            Debug.Log(agent);
         }
     }
 }

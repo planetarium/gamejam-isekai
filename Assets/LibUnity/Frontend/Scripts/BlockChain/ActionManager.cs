@@ -35,5 +35,11 @@ namespace LibUnity.Frontend.BlockChain
             _agent = agent;
             _renderer = agent.ActionRenderer;
         }
+
+        public void SignUp()
+        {
+            var action = new SignUp();
+            ProcessAction(action);
+        }
     }
 }

@@ -17,8 +17,8 @@ namespace LibUnity.Frontend.BlockChain
 
         private static readonly IImmutableDictionary<Env, string> DirNames = new Dictionary<Env, string>
         {
-            [Env.Production] = "9c",
-            [Env.Development] = "9c_dev",
+            [Env.Production] = "isekai",
+            [Env.Development] = "isekai_dev",
         }.ToImmutableDictionary();
 
         public static string GetDefaultStoragePath(Env? env = null)
