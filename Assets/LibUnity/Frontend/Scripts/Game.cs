@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.IO;
 using Boscohyun;
+using Libplanet;
 using Libplanet.Crypto;
 using LibUnity.Frontend.BlockChain;
 using LibUnity.Frontend.State;
@@ -77,10 +78,13 @@ namespace LibUnity.Frontend
 
         private IEnumerator CoLogin(Action<bool> callback)
         {
-            
-            Agent.Initialize(
+            var privateKey = string.IsNullOrEmpty(_options.PrivateKey)
+                ? new PrivateKey()
+                : new PrivateKey(ByteUtil.ParseHex(_options.PrivateKey));
+
+                    Agent.Initialize(
                 _options,
-                new PrivateKey(),
+                privateKey,
                 callback
             );
             yield break;
