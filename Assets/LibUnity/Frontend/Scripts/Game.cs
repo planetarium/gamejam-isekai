@@ -38,8 +38,8 @@ namespace LibUnity.Frontend
             _options = CommandLineOptions.Load(
                 CommandLineOptionsJsonPath
             );
-
-     
+            
+            
             Agent = GetComponent<Agent>();
             States = new States();
         }
@@ -56,6 +56,7 @@ namespace LibUnity.Frontend
                         Debug.Log($"Agent initialized. {succeed}");
                         agentInitialized = true;
                         agentInitializeSucceed = succeed;
+                        SceneLoader.Instnace.Load("Prologue");
                     }
                 )
             );
@@ -85,8 +86,7 @@ namespace LibUnity.Frontend
                 privateKey,
                 callback
             );
-            yield break;
-
+                    yield break;
 //             if (_options.Maintenance)
 //             {
 //                 var w = Widget.Create<SystemPopup>();
