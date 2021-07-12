@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -21,15 +22,16 @@ namespace LibUnity.Frontend
             button.onClick.AddListener(ShowStageInfoPopup);
         }
 
-        private static void ShowStageInfoPopup()
+        private void ShowStageInfoPopup()
         {
-            Lobby.Instance.SetActiveStagePopup(true);
+            var index = int.Parse(stage.text) - 1;
+            Lobby.Instance.ShowStageInformation(index);
         }
 
         public void UpdateItem(int index)
         {
             background.sprite = map[index % 20];
-            stage.text = index.ToString();
+            stage.text = (index + 1).ToString();
             var sinValue = Mathf.Sin(Degree * index * Mathf.Deg2Rad);
             var x = sinValue * sinValue * Gap;
             button.transform.localPosition = new Vector2(x, button.transform.localPosition.y);

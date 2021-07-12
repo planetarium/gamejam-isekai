@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,9 +17,9 @@ namespace LibUnity.Frontend
             Instnace = this;
         }
 
-        public void Load(string sceneName)
+        public void Load(string sceneName, Action callback = null)
         {
-            StartCoroutine(LoadScene(sceneName));
+            StartCoroutine(LoadScene(sceneName, callback));
         }
         
         public void Unload(string sceneName)
@@ -26,7 +27,7 @@ namespace LibUnity.Frontend
             SceneManager.UnloadSceneAsync(sceneName);
         }
 
-        private IEnumerator LoadScene(string sceneName)
+        private IEnumerator LoadScene(string sceneName, Action callback = null)
         {
             loading.fillAmount = 0;
             var operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
@@ -36,6 +37,7 @@ namespace LibUnity.Frontend
                 loading.fillAmount = operation.progress;
             }
             loading.fillAmount = 0;
+            callback?.Invoke();
         }
     }
 }

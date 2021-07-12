@@ -17,7 +17,7 @@ public static class TextTyper
 
     public static IEnumerator Rewind(TMP_Text typingText, string message, float speed, Action callback = null)
     {
-        for (var i = 0; i < message.Length; i++)
+        for (var i = 0; i <= message.Length; i++)
         {
             typingText.text = message.Substring(0, message.Length - i);
             yield return new WaitForSeconds(speed);

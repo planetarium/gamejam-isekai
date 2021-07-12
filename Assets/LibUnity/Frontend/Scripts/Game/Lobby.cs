@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace LibUnity.Frontend
 {
@@ -7,16 +6,24 @@ namespace LibUnity.Frontend
     {
         public static Lobby Instance;
 
-        [SerializeField] private GameObject stagePopup;
+        [SerializeField] private StageInformationPopup stageInformationPopup;
+        [SerializeField] private StageResultPopup stageResultPopup;
 
         private void Awake()
         {
             Instance = this;
         }
 
-        public void SetActiveStagePopup(bool value)
+        public void ShowStageInformation(int index)
         {
-            stagePopup.SetActive(value);
+            stageInformationPopup.gameObject.SetActive(true);
+            stageInformationPopup.Initialize(index);
+        }
+
+        public void ShowResult(bool isSuccess, int index)
+        {
+            stageResultPopup.gameObject.SetActive(true);
+            stageResultPopup.Initialize(isSuccess, index);
         }
     }
 }
