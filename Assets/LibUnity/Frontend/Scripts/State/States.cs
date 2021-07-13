@@ -1,6 +1,6 @@
 using LibUnity.Backend.State;
 using LibUnity.Frontend.State.Subjects;
-using Debug = UnityEngine.Debug;
+using UnityEngine;
 
 namespace LibUnity.Frontend.State
 {

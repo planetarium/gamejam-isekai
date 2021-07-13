@@ -365,17 +365,6 @@ namespace LibUnity.Frontend.BlockChain
                 genesisBlockPath
             );
 
-            // 별도 쓰레드에서는 GameObject.GetComponent<T> 를 사용할 수 없기때문에 미리 선언.
-            // var loadingScreen = Widget.Find<PreloadingScreen>();
-            // BootstrapStarted += (_, state) =>
-            //     loadingScreen.Message = L10nManager.Localize("UI_LOADING_BOOTSTRAP_START");
-            // PreloadProcessed += (_, state) =>
-            // {
-            //     if (loadingScreen)
-            //     {
-            //         loadingScreen.Message = GetLoadingScreenMessage(state);
-            //     }
-            // };
             PreloadEnded += (_, __) =>
             {
                 Currency goldCurrency = new GoldCurrencyState(
@@ -611,21 +600,6 @@ namespace LibUnity.Frontend.BlockChain
                     }
                 });
                 yield return new WaitUntil(() => bootstrapTask.IsCompleted);
-#if !UNITY_EDITOR
-                if (!Application.isBatchMode && (bootstrapTask.IsFaulted || bootstrapTask.IsCanceled))
-                {
-                    var errorMsg = string.Format(L10nManager.Localize("UI_ERROR_FORMAT"),
-                        L10nManager.Localize("BOOTSTRAP_FAIL"));
-
-                    Widget.Find<SystemPopup>().Show(
-                        L10nManager.Localize("UI_ERROR"),
-                        errorMsg,
-                        L10nManager.Localize("UI_QUIT"),
-                        false
-                    );
-                    yield break;
-                }
-#endif
                 var started = DateTimeOffset.UtcNow;
                 var existingBlocks = blocks?.Tip?.Index ?? 0;
                 Debug.Log("Preloading starts");
