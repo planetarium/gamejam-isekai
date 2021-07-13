@@ -41,16 +41,16 @@ namespace LibUnity.Frontend
 
             confirmButton.onClick.AddListener(() =>
             {
-                Confirm(selectedStory);
+                Confirm(selectedStory, isSuccess);
             });
             
             bgButton.onClick.AddListener(() =>
             {
-                Confirm(selectedStory);
+                Confirm(selectedStory, isSuccess);
             });
         }
 
-        private void Confirm(string selectedStory)
+        private void Confirm(string selectedStory, bool isSuccess)
         {
             if (_isDone)
             {
@@ -63,7 +63,7 @@ namespace LibUnity.Frontend
                     StopCoroutine(_coroutine);
                 }
 
-                storyText.text = selectedStory;
+                storyText.text = isSuccess ? selectedStory : string.Empty;
                 _isDone = true;
             }
         }

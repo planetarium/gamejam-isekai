@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: c5bbf9863062a114e881c8e9ab718eff
+guid: d5e23e9ccf651314cbe742cf911f675d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3243021406879031472
-    second: ReverseBackground_0
+      213: -3998073677068660129
+    second: bg_01_0
   - first:
-      213: 1747523562404890965
-    second: ReverseBackground_1
+      213: -5537946173797920611
+    second: bg_01_1
   - first:
-      213: 1466200792837139906
-    second: ReverseBackground_2
+      213: 5721091125869910921
+    second: bg_01_2
   - first:
-      213: 4507131921411609948
-    second: ReverseBackground_3
+      213: -663259297326197426
+    second: bg_01_3
   - first:
-      213: -3989639424008164466
-    second: ReverseBackground_4
+      213: 2987436453234199973
+    second: bg_01_4
   - first:
-      213: -3378090273369883423
-    second: ReverseBackground_5
+      213: 1349372914481404868
+    second: bg_01_5
   - first:
-      213: -545017824690949612
-    second: ReverseBackground_6
+      213: -2040562827859110804
+    second: bg_01_6
   - first:
-      213: 5490788356391347501
-    second: ReverseBackground_7
+      213: 3986013340205169402
+    second: bg_01_7
   - first:
-      213: 7605631843998025613
-    second: ReverseBackground_8
+      213: 6267562163853049858
+    second: bg_01_8
   - first:
-      213: 734351458511094605
-    second: ReverseBackground_9
+      213: -1337516565647509373
+    second: bg_01_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -121,12 +121,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ReverseBackground_0
+      name: bg_01_0
       rect:
         serializedVersion: 2
         x: 0
         y: 1728
-        width: 1080
+        width: 745
         height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -135,19 +135,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b0230c89c6810d20800000000000000
-      internalID: 3243021406879031472
+      spriteID: f529b746c2df388c0800000000000000
+      internalID: -3998073677068660129
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ReverseBackground_1
+      name: bg_01_1
       rect:
         serializedVersion: 2
         x: 0
         y: 1536
-        width: 1080
+        width: 745
         height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -156,19 +156,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 559c4c5db63704810800000000000000
-      internalID: 1747523562404890965
+      spriteID: d909a85db434523b0800000000000000
+      internalID: -5537946173797920611
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ReverseBackground_2
+      name: bg_01_2
       rect:
         serializedVersion: 2
         x: 0
         y: 1344
-        width: 1080
+        width: 745
         height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -177,19 +177,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cd24725addf85410800000000000000
-      internalID: 1466200792837139906
+      spriteID: 98b9d1d3116656f40800000000000000
+      internalID: 5721091125869910921
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ReverseBackground_3
+      name: bg_01_3
       rect:
         serializedVersion: 2
         x: 0
         y: 1152
-        width: 1080
+        width: 745
         height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -198,19 +198,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c55109b4a9c8c8e30800000000000000
-      internalID: 4507131921411609948
+      spriteID: e4595e4ee21abc6f0800000000000000
+      internalID: -663259297326197426
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ReverseBackground_4
+      name: bg_01_4
       rect:
         serializedVersion: 2
         x: 0
         y: 960
-        width: 1080
+        width: 745
         height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -219,19 +219,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8b6916f414f1a8c0800000000000000
-      internalID: -3989639424008164466
+      spriteID: 5adc31840a1857920800000000000000
+      internalID: 2987436453234199973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ReverseBackground_5
+      name: bg_01_5
       rect:
         serializedVersion: 2
         x: 0
         y: 768
-        width: 1080
+        width: 745
         height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -240,19 +240,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ecf5945bcc9e11d0800000000000000
-      internalID: -3378090273369883423
+      spriteID: 4cb9235348fe9b210800000000000000
+      internalID: 1349372914481404868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ReverseBackground_6
+      name: bg_01_6
       rect:
         serializedVersion: 2
         x: 0
         y: 576
-        width: 1080
+        width: 745
         height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -261,19 +261,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4123a031d25bf68f0800000000000000
-      internalID: -545017824690949612
+      spriteID: c64579f5be67ea3e0800000000000000
+      internalID: -2040562827859110804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ReverseBackground_7
+      name: bg_01_7
       rect:
         serializedVersion: 2
         x: 0
         y: 384
-        width: 1080
+        width: 745
         height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -282,19 +282,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d25ae8f2be2333c40800000000000000
-      internalID: 5490788356391347501
+      spriteID: afab5ec930a215730800000000000000
+      internalID: 3986013340205169402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ReverseBackground_8
+      name: bg_01_8
       rect:
         serializedVersion: 2
         x: 0
         y: 192
-        width: 1080
+        width: 745
         height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -303,19 +303,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d87c6e1add1ac8960800000000000000
-      internalID: 7605631843998025613
+      spriteID: 200c320c49adaf650800000000000000
+      internalID: 6267562163853049858
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ReverseBackground_9
+      name: bg_01_9
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1080
+        width: 745
         height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -324,8 +324,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4308d0c2c0f03a00800000000000000
-      internalID: 734351458511094605
+      spriteID: 388316f15cf207de0800000000000000
+      internalID: -1337516565647509373
       vertices: []
       indices: 
       edges: []

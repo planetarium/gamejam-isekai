@@ -15,7 +15,9 @@ namespace LibUnity.Frontend
         [SerializeField] private List<Sprite> map;
 
         private const float Degree = 18;
-        private const float Gap = 300;
+        private const float Gap = 20;
+        private const float Revision = 150;
+        private const int Cycle = 20;
 
         protected override void Awake()
         {
@@ -30,10 +32,19 @@ namespace LibUnity.Frontend
 
         public void UpdateItem(int index)
         {
-            background.sprite = map[index % 20];
+            var temp = index % Cycle;
+            background.transform.localScale = Vector3.one;
+            if (temp > 9)
+            {
+                temp = Cycle - 1 - temp;
+                background.transform.localScale = new Vector3(1, -1, 1);
+            }
+
+            background.sprite = map[temp];
             stage.text = (index + 1).ToString();
-            var sinValue = Mathf.Sin(Degree * index * Mathf.Deg2Rad);
-            var x = sinValue * sinValue * Gap;
+            var value = Mathf.Sin(Degree * index * Mathf.Deg2Rad);
+            
+            var x = (Mathf.Abs(value) * Gap * Gap) - Revision;
             button.transform.localPosition = new Vector2(x, button.transform.localPosition.y);
         }
     }
