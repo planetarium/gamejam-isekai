@@ -1,5 +1,8 @@
-using System;
+using Bencodex.Types;
+using Libplanet.Assets;
 using Libplanet.Blocks;
+using LibUnity.Backend;
+using LibUnity.Backend.State;
 using LibUnity.Frontend;
 using TMPro;
 using UnityEngine;
@@ -11,6 +14,7 @@ public class BlockInfo : MonoBehaviour
     private TextMeshProUGUI informationText;
     private long _blockIndex;
     private BlockHash _hash;
+    private Currency _currency;
     
     void Awake()
     {
@@ -39,6 +43,13 @@ public class BlockInfo : MonoBehaviour
     private void UpdateText()
     {
         Debug.Log("UpdateText");
-        informationText.text = $"Block index : <color=#FF0000>{_blockIndex}</color> / Hash: <color=#FF0000>{_hash.ToString()}</color>";;
+        var address = Game.Instance.Agent.Address;
+        if (_currency.Equals(default))
+        {
+            _currency = new GoldCurrencyState((Dictionary) Game.Instance.Agent.GetState(Addresses.GoldCurrency)).Currency;
+        }
+
+        var balance = Game.Instance.Agent.GetBalance(address, _currency);
+        informationText.text = $"Block index : <color=#FF0000>{_blockIndex}</color> / Hash: <color=#FF0000>{_hash.ToString()}</color> / Balance: {balance.GetQuantityString()}";;
     }
 }
