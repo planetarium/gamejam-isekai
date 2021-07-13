@@ -176,7 +176,7 @@ GameObject:
   - component: {fileID: 3709184887615048405}
   - component: {fileID: 3709184887615048404}
   m_Layer: 5
-  m_Name: StageList
+  m_Name: EventList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

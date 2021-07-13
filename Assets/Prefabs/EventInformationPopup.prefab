@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 277774050132774337}
   - component: {fileID: 277774050132774342}
   m_Layer: 5
-  m_Name: StageInformationPopup
+  m_Name: EventInformationPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 941745efb29713144bf6374a00997c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageText: {fileID: 8223756381912266066}
+  eventText: {fileID: 8223756381912266066}
   startButton: {fileID: 2576348053481309436}
   closeButton: {fileID: 6334948833028953243}
   bgButton: {fileID: 3343073337037529217}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 4828663680265093569}
   - component: {fileID: 8223756381912266066}
   m_Layer: 5
-  m_Name: StageText
+  m_Name: EventText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

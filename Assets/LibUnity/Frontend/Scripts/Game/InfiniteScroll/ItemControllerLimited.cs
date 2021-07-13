@@ -29,7 +29,7 @@ public class ItemControllerLimited : UIBehaviour, IInfiniteScrollSetup {
 		else {
 			obj.SetActive (true);
 			
-			var item = obj.GetComponentInChildren<StageItem>();
+			var item = obj.GetComponentInChildren<EventItem>();
 			item.UpdateItem(itemCount);
 		}
 	}

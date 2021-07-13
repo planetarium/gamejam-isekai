@@ -1,26 +1,27 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace LibUnity.Frontend
 {
-    public class StageInformationPopup : MonoBehaviour
+    public class EventInformationPopup : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI stageText;
+        [SerializeField] private TextMeshProUGUI eventText;
         [SerializeField] private Button startButton;
         [SerializeField] private Button closeButton;
         [SerializeField] private Button bgButton;
 
         public void Initialize(int index)
         {
-            stageText.text = $"{index + 1} 스테이지";
+            eventText.text = $"{index + 1} Event";
             
             startButton.onClick.AddListener(() =>
             {
                 SceneLoader.Instnace.Unload("Lobby");
-                SceneLoader.Instnace.Load("Stage", () =>
+                SceneLoader.Instnace.Load("Event", () =>
                 {
-                    Stage.Instance.Initialize(index);
+                    Event.Instance.Initialize(index);
                 });
             });
             

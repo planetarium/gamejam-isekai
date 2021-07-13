@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,7 +6,7 @@ using UnityEngine.UI;
 
 namespace LibUnity.Frontend
 {
-    public class StageItem : UIBehaviour
+    public class EventItem : UIBehaviour
     {
         [SerializeField] private Button button;
         [SerializeField] private TextMeshProUGUI stage;

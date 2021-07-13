@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LibUnity.Frontend
 {
@@ -6,8 +7,8 @@ namespace LibUnity.Frontend
     {
         public static Lobby Instance;
 
-        [SerializeField] private StageInformationPopup stageInformationPopup;
-        [SerializeField] private StageResultPopup stageResultPopup;
+        [FormerlySerializedAs("stageInformationPopup")] [SerializeField] private EventInformationPopup eventInformationPopup;
+        [FormerlySerializedAs("stageResultPopup")] [SerializeField] private EventResultPopup eventResultPopup;
 
         private void Awake()
         {
@@ -16,14 +17,14 @@ namespace LibUnity.Frontend
 
         public void ShowStageInformation(int index)
         {
-            stageInformationPopup.gameObject.SetActive(true);
-            stageInformationPopup.Initialize(index);
+            eventInformationPopup.gameObject.SetActive(true);
+            eventInformationPopup.Initialize(index);
         }
 
         public void ShowResult(bool isSuccess, int index)
         {
-            stageResultPopup.gameObject.SetActive(true);
-            stageResultPopup.Initialize(isSuccess, index);
+            eventResultPopup.gameObject.SetActive(true);
+            eventResultPopup.Initialize(isSuccess, index);
         }
     }
 }

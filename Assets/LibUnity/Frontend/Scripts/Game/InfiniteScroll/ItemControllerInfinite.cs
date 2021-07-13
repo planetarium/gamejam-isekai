@@ -14,7 +14,7 @@ public class ItemControllerInfinite : UIBehaviour, IInfiniteScrollSetup
 
 	public void OnUpdateItem(int itemCount, GameObject obj)
 	{
-		var item = obj.GetComponentInChildren<StageItem>();
+		var item = obj.GetComponentInChildren<EventItem>();
 		item.UpdateItem(itemCount);
 	}
 }

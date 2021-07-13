@@ -18,7 +18,7 @@ public class ItemControllerLoop : UIBehaviour, IInfiniteScrollSetup
 	{
 		if(isSetuped == true) return;
 
-		var item = obj.GetComponentInChildren<StageItem>();
+		var item = obj.GetComponentInChildren<EventItem>();
 		item.UpdateItem(itemCount);
 	}
 }

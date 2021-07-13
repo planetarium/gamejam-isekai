@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace LibUnity.Frontend
 {
-    public class StageResultPopup : MonoBehaviour
+    public class EventResultPopup : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI resultText;
         [SerializeField] private TextMeshProUGUI storyText;
