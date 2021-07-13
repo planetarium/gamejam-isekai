@@ -5,6 +5,7 @@ using Bencodex.Types;
 using Libplanet;
 using Libplanet.Action;
 using Libplanet.Assets;
+using LibUnity.Backend.State;
 
 namespace LibUnity.Backend.Action
 {
@@ -21,6 +22,7 @@ namespace LibUnity.Backend.Action
         {
             var states = context.PreviousStates;
             states = GenesisGoldDistribution(context, states);
+            states = GenerateStage(context, states);
             return MinerReward(context, states);
         }
 
@@ -77,6 +79,18 @@ namespace LibUnity.Backend.Action
                     ctx.Miner,
                     miningReward
                 );
+            }
+
+            return states;
+        }
+
+        public IAccountStateDelta GenerateStage(IActionContext ctx, IAccountStateDelta states)
+        {
+            var level = (int) ctx.BlockIndex / 10;
+            if (states.GetState(StageState.Derive(level)) is null)
+            {
+                var stageState = new StageState(level);
+                states = states.SetState(stageState.Address, stageState.Serialize());
             }
 
             return states;

@@ -35,6 +35,7 @@ namespace LibUnity.Frontend.BlockChain
         {
             _renderer = renderer;
             _renderer.EveryRender<SignUp>().Subscribe(RenderSignUp);
+            _renderer.EveryRender<Conquest>().Subscribe(RenderConquest);
         }
 
         public void Stop()
@@ -43,6 +44,12 @@ namespace LibUnity.Frontend.BlockChain
         }
 
         private void RenderSignUp(BaseAction.ActionEvaluation<SignUp> eval)
+        {
+            var agent = eval.OutputStates.GetState(Game.Instance.Agent.Address);
+            Debug.Log(agent);
+        }
+
+        private void RenderConquest(BaseAction.ActionEvaluation<Conquest> eval)
         {
             var agent = eval.OutputStates.GetState(Game.Instance.Agent.Address);
             Debug.Log(agent);

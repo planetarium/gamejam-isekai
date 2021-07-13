@@ -41,5 +41,15 @@ namespace LibUnity.Frontend.BlockChain
             var action = new SignUp();
             ProcessAction(action);
         }
+
+        public void Conquest(int stageLevel)
+        {
+            var action = new Conquest
+            {
+                StageLevel = stageLevel
+            };
+            ProcessAction(action);
+        }
+
     }
 }
