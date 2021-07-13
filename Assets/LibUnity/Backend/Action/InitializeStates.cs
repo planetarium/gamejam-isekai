@@ -10,6 +10,7 @@ namespace LibUnity.Backend.Action
     [ActionType("initialize_states")]
     public class InitializeStates : GameAction
     {
+        public const int InitStageLevel = 50;
         public Bencodex.Types.Dictionary GoldCurrency { get; set; }
 
         public Bencodex.Types.List GoldDistributions { get; set; }
@@ -35,6 +36,12 @@ namespace LibUnity.Backend.Action
 
             if (ctx.Rehearsal)
             {
+                for (int i = 0; i < InitStageLevel; i++)
+                {
+                    var stageAddress = StageState.Derive(i);
+                    states = states.SetState(stageAddress, MarkChanged);
+                }
+
                 states = states.SetState(Addresses.GoldCurrency, MarkChanged);
                 states = states.SetState(Addresses.GoldDistribution, MarkChanged);
                 return states;
@@ -43,6 +50,12 @@ namespace LibUnity.Backend.Action
             if (ctx.BlockIndex != 0)
             {
                 return states;
+            }
+
+            for (int i = 1; i < 50; i++)
+            {
+                var stageState = new StageState(i);
+                states = states.SetState(stageState.Address, stageState.Serialize());
             }
 
             states = states
