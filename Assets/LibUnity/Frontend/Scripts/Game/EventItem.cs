@@ -9,7 +9,8 @@ namespace LibUnity.Frontend
     public class EventItem : UIBehaviour
     {
         [SerializeField] private Button button;
-        [SerializeField] private TextMeshProUGUI stage;
+        [SerializeField] private TextMeshProUGUI stageText;
+        [SerializeField] private TextMeshProUGUI conquerorText;
         [SerializeField] private Image background;
         [SerializeField] private List<Sprite> map;
 
@@ -25,7 +26,7 @@ namespace LibUnity.Frontend
 
         private void ShowStageInfoPopup()
         {
-            var index = int.Parse(stage.text) - 1;
+            var index = int.Parse(stageText.text) - 1;
             Lobby.Instance.ShowStageInformation(index);
         }
 
@@ -40,7 +41,9 @@ namespace LibUnity.Frontend
             }
 
             background.sprite = map[temp];
-            stage.text = (index + 1).ToString();
+            stageText.text = (index + 1).ToString();
+            conquerorText.text = Lobby.Instance.GetConqueror(index); 
+            
             var value = Mathf.Sin(Degree * index * Mathf.Deg2Rad);
             
             var x = (Mathf.Abs(value) * Gap * Gap) - Revision;

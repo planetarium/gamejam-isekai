@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,20 +8,30 @@ namespace LibUnity.Frontend
     {
         [SerializeField] private Button successButton;
         [SerializeField] private Button failedButton;
-    
-        public void Initialize(int index)
+
+        private Action<bool> _result;
+        
+        public void Initialize(Action<bool> callback)
         {
+            _result = callback;
+            
             successButton.onClick.AddListener((() =>
             {
-                Game.Instance.ActionManager.Conquest(index);
-                SceneLoader.Instnace.Unload("Event");
-                SceneLoader.Instnace.Load("Lobby");
+                callback?.Invoke(true);
+                
+                // Event.Instance.ShowResult(true, index, contents);
+                
+                
+                // SceneLoader.Instnace.Unload("Event");
+                // SceneLoader.Instnace.Load("Lobby");
             }));
 
             failedButton.onClick.AddListener((() =>
             {
-                SceneLoader.Instnace.Unload("Event");
-                SceneLoader.Instnace.Load("Lobby", () => { Lobby.Instance.ShowResult(false, index); });
+                callback?.Invoke(false);
+                // Event.Instance.ShowResult(false, index, contents);
+                // SceneLoader.Instnace.Unload("Event");
+                // SceneLoader.Instnace.Load("Lobby", () => {  });
             }));
         }
     }

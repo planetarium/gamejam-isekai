@@ -22,6 +22,8 @@ namespace LibUnity.Frontend
         public bool IsInitialized { get; private set; }
 
         private CommandLineOptions _options;
+        
+        public Story Story { get; set; }
 
         private static readonly string CommandLineOptionsJsonPath =
             Path.Combine(Application.streamingAssetsPath, "clo.json");

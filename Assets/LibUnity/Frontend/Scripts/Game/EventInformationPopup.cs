@@ -35,7 +35,7 @@ namespace LibUnity.Frontend
                 SceneLoader.Instnace.Unload("Lobby");
                 SceneLoader.Instnace.Load("Event", () =>
                 {
-                    Event.Instance.Initialize(index);
+                    Event.Instance.Initialize(index, eventContent.text);
                 });
             });
             

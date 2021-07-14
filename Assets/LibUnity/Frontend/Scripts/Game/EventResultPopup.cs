@@ -1,81 +1,50 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace LibUnity.Frontend
 {
     public class EventResultPopup : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI resultText;
-        [SerializeField] private TextMeshProUGUI storyText;
-        [SerializeField] private Button confirmButton;
-        [SerializeField] private Button bgButton;
-        [SerializeField] private List<string> story = new List<string>();
-        [SerializeField] private float typingSpeed = 0.1f;
+        [SerializeField] private TextMeshProUGUI eventIndexText;
+        [SerializeField] private TextMeshProUGUI eventContentsText;
+        [SerializeField] private GameObject successContainer;
+        [SerializeField] private GameObject failedContainer;
+        [SerializeField] private Button sendResultButton;
+        [SerializeField] private Button retryButton;
+        [SerializeField] private Button mainButton;
 
-        private Coroutine _coroutine;
-        private const string DefaultStory = "스토리가 아직 없습니다.";
-        private bool _isDone;
-
-        public void Initialize(bool isSuccess, int index)
+        public void Initialize(bool isSuccess, (int, string) eventInfo)
         {
-            _isDone = false;
-            var selectedStory = story.Count > index ? story[index] : DefaultStory;
-            resultText.text = isSuccess ? "성공!" : "실패ㅜ";
+            var (index, contents) = eventInfo;
+            eventIndexText.text = (index + 1).ToString();
+            eventContentsText.text = contents;
             if (isSuccess)
             {
-                _coroutine = StartCoroutine(TextTyper.Play(storyText, selectedStory, typingSpeed, () =>
+                successContainer.SetActive(true);
+                failedContainer.SetActive(false);
+                sendResultButton.onClick.AddListener(() =>
                 {
-                    _isDone = true;
-                }));
+                    SceneLoader.Instnace.Unload("Event");
+                    SceneLoader.Instnace.Load("Story", () =>
+                    {
+                        Story.Instance.Initialize(index, () => Game.Instance.ActionManager.Conquest(index));
+                    });
+                    
+                });
             }
             else
             {
-                _coroutine = StartCoroutine(TextTyper.Rewind(storyText, selectedStory, typingSpeed, () =>
+                successContainer.SetActive(false);
+                failedContainer.SetActive(true);
+                retryButton.onClick.AddListener(() => { });
+
+                mainButton.onClick.AddListener(() =>
                 {
-                    _isDone = true;
-                }));
+                    SceneLoader.Instnace.Unload("Event");
+                    SceneLoader.Instnace.Load("Lobby");
+                });
             }
-
-            confirmButton.onClick.AddListener(() =>
-            {
-                Confirm(selectedStory, isSuccess);
-            });
-            
-            bgButton.onClick.AddListener(() =>
-            {
-                Confirm(selectedStory, isSuccess);
-            });
-        }
-
-        private void Confirm(string selectedStory, bool isSuccess)
-        {
-            if (_isDone)
-            {
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                if (_coroutine != null)
-                {
-                    StopCoroutine(_coroutine);
-                }
-
-                storyText.text = isSuccess ? selectedStory : string.Empty;
-                _isDone = true;
-            }
-        }
-
-        private void OnDisable()
-        {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
-            confirmButton.onClick.RemoveAllListeners();
-            bgButton.onClick.RemoveAllListeners();
         }
     }
 }

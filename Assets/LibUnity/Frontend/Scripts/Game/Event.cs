@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace LibUnity.Frontend
 {
@@ -9,16 +8,21 @@ namespace LibUnity.Frontend
     {
         public static Event Instance;
 
-        [FormerlySerializedAs("stageText")] [SerializeField] private TextMeshProUGUI eventText;
+        [SerializeField] private TextMeshProUGUI eventText;
         [SerializeField] private List<GameObject> events = new List<GameObject>();
+        [SerializeField] private EventResultPopup eventResultPopup;
 
+        private (int, string) _eventInfo;
+        
         private void Awake()
         {
             Instance = this;
         }
 
-        public void Initialize(int index)
+        
+        public void Initialize(int index, string contents)
         {
+            _eventInfo = (index, contents);
             eventText.text = $"{index + 1} Event";
             LoadStage(index);
         }
@@ -28,7 +32,13 @@ namespace LibUnity.Frontend
             var id = events.Count > index ? index : 0; 
             var go = Instantiate(events[id], Vector3.zero, Quaternion.identity);
             go.transform.SetParent(transform);
-            go.GetComponent<IEvent>().Initialize(index);
+            go.GetComponent<IEvent>().Initialize(ShowResult);
+        }
+
+        private void ShowResult(bool isSuccess)
+        {
+            eventResultPopup.gameObject.SetActive(true);
+            eventResultPopup.Initialize(isSuccess, _eventInfo);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Bencodex.Types;
 using LibUnity.Backend.State;
 using UniRx;
@@ -17,14 +18,15 @@ namespace LibUnity.Frontend
         [SerializeField] private ItemControllerLimited itemControllerLimited;
 
         private readonly Dictionary<long, List<StageState.StageHistory>> _stageHistory =
-            new Dictionary<long, List<StageState.StageHistory>>(); 
+            new Dictionary<long, List<StageState.StageHistory>>();
 
         private void Awake()
         {
             Instance = this;
             // Game.Instance.Agent.BlockIndex
             UpdateList();
-            ObservableExtensions.Subscribe(Game.Instance.Agent.BlockIndexSubject, SubscribeBlockIndex).AddTo(gameObject);
+            ObservableExtensions.Subscribe(Game.Instance.Agent.BlockIndexSubject, SubscribeBlockIndex)
+                .AddTo(gameObject);
         }
 
         public void ShowStageInformation(int index)
@@ -33,18 +35,11 @@ namespace LibUnity.Frontend
             {
                 return;
             }
-            
+
             eventInformationPopup.gameObject.SetActive(true);
             eventInformationPopup.Initialize(index, _stageHistory[index]);
         }
 
-        public void ShowResult(bool isSuccess, int index)
-        {
-            UpdateList();
-            eventResultPopup.gameObject.SetActive(true);
-            eventResultPopup.Initialize(isSuccess, index);
-        }
-        
         private void SubscribeBlockIndex(long blockIndex)
         {
             UpdateList();
@@ -53,7 +48,7 @@ namespace LibUnity.Frontend
         private void UpdateList()
         {
             _stageHistory.Clear();
-            var index = 0; 
+            var index = 0;
             while (true)
             {
                 var state = Game.Instance.Agent.GetState(StageState.Derive(index));
@@ -61,17 +56,30 @@ namespace LibUnity.Frontend
                 {
                     break;
                 }
-                
+
                 var stageState = new StageState((Dictionary) state);
                 if (!_stageHistory.ContainsKey(index))
                 {
                     _stageHistory.Add(index, stageState.Histories);
                 }
+
                 index++;
             }
 
             itemControllerLimited.Max = index;
             infiniteScroll.Reset();
+        }
+
+        public string GetConqueror(int index)
+        {
+            if (!_stageHistory.ContainsKey(index))
+            {
+                return string.Empty;
+            }
+            
+            var histories = _stageHistory[index];
+            return histories.Count > 0 ? histories.Last().AgentAddress.ToHex().Substring(0, 4) : string.Empty;
+
         }
     }
 }

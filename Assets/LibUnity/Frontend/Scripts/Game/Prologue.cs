@@ -16,9 +16,9 @@ namespace LibUnity.Frontend
 
         private void Start()
         {
-            _coroutine = StartCoroutine(TextTyper.Play(text, synopsis, typingSpeed, () =>
+            _coroutine = StartCoroutine(TextTyper.Play(text, synopsis, typingSpeed, (isSuccess) =>
             {
-                _isDone = true;
+                _isDone = isSuccess;
                 SceneLoader.Instnace.Unload("Prologue");
                 SceneLoader.Instnace.Load("Lobby");
             }));

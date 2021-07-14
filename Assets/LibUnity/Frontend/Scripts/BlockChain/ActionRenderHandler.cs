@@ -51,16 +51,10 @@ namespace LibUnity.Frontend.BlockChain
 
         private void RenderConquest(BaseAction.ActionEvaluation<Conquest> eval)
         {
-            if (eval.Exception is null)
-            {
-                var agent = eval.OutputStates.GetState(Game.Instance.Agent.Address);                
-                Debug.Log($"[RenderConquest] : {agent} ");
-                if (eval.Action != null)
-                {
-                    Lobby.Instance.ShowResult(true, eval.Action.StageLevel);
-                    Debug.Log($"[RenderConquest] LEVEL : {eval.Action.StageLevel}");
-                }
-            }
+            TextTyper.IsRendered = true;
+            TextTyper.IsSuccess = eval.Exception is null;
+            var agent = eval.OutputStates.GetState(Game.Instance.Agent.Address);
+            Debug.Log($"[RenderConquest] : {agent}");
         }
     }
 }
