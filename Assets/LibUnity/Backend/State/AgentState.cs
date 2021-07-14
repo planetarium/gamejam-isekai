@@ -29,6 +29,10 @@ namespace LibUnity.Backend.State
 
         public void Add(int stageId)
         {
+            if (ClearedStageList.Contains(stageId))
+            {
+                return;
+            }
             ClearedStageList.Add(stageId);
         }
     }

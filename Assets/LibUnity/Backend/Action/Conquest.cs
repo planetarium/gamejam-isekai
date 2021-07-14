@@ -36,7 +36,8 @@ namespace LibUnity.Backend.Action
             stageState.Add(agentAddress, context.BlockIndex);
             return states
                 .SetState(stageAddress, stageState.Serialize())
-                .SetState(agentAddress, agentState.Serialize());
+                .SetState(agentAddress, agentState.Serialize())
+                .MintAsset(agentAddress, states.GetGoldCurrency() * 50);
         }
 
         protected override IImmutableDictionary<string, IValue> PlainValueInternal => new Dictionary<string, IValue>
