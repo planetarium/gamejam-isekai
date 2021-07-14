@@ -1,6 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using LibUnity.Backend.Action;
 using LibUnity.Backend.State;
+using LibUnity.Frontend.BlockChain;
+using LibUnity.Frontend.State;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -32,13 +36,22 @@ namespace LibUnity.Frontend
 
             startButton.onClick.AddListener(() =>
             {
+                Debug.Log($"current : {Game.Instance.Agent.BlockIndex}");
+                if (histories.Any() &&
+                    histories.Last().ConquestBlockIndex + StageState.ConquestInterval> Game.Instance.Agent.BlockIndex)
+                {
+                    var standard = histories.Last().ConquestBlockIndex + StageState.ConquestInterval;
+                    Lobby.Instance.ShowNotification($"아직 점령할 수 없습니다 {standard}블록 이후부터 점령가능");
+                    return;
+                }
+                
                 SceneLoader.Instnace.Unload("Lobby");
                 SceneLoader.Instnace.Load("Event", () =>
                 {
                     Event.Instance.Initialize(index, eventContent.text);
                 });
             });
-            
+
             closeButton.onClick.AddListener(() =>
             {
                 gameObject.SetActive(false);

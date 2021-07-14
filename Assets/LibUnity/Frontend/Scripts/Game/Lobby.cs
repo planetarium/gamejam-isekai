@@ -12,8 +12,8 @@ namespace LibUnity.Frontend
     {
         public static Lobby Instance;
 
+        [SerializeField] private Notification notification;
         [SerializeField] private EventInformationPopup eventInformationPopup;
-        [SerializeField] private EventResultPopup eventResultPopup;
         [SerializeField] private InfiniteScroll infiniteScroll;
         [SerializeField] private ItemControllerLimited itemControllerLimited;
 
@@ -23,7 +23,6 @@ namespace LibUnity.Frontend
         private void Awake()
         {
             Instance = this;
-            // Game.Instance.Agent.BlockIndex
             UpdateList();
             ObservableExtensions.Subscribe(Game.Instance.Agent.BlockIndexSubject, SubscribeBlockIndex)
                 .AddTo(gameObject);
@@ -35,6 +34,8 @@ namespace LibUnity.Frontend
             {
                 return;
             }
+
+            var histories = _stageHistory[index];
 
             eventInformationPopup.gameObject.SetActive(true);
             eventInformationPopup.Initialize(index, _stageHistory[index]);
@@ -79,7 +80,12 @@ namespace LibUnity.Frontend
             
             var histories = _stageHistory[index];
             return histories.Count > 0 ? histories.Last().AgentAddress.ToHex().Substring(0, 4) : string.Empty;
+        }
 
+        public void ShowNotification(string message)
+        {
+            notification.gameObject.SetActive(true);
+            notification.Show(message);
         }
     }
 }
