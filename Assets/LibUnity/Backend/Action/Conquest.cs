@@ -22,7 +22,8 @@ namespace LibUnity.Backend.Action
             {
                 return states
                     .SetState(stageAddress, MarkChanged)
-                    .SetState(agentAddress, MarkChanged);
+                    .SetState(agentAddress, MarkChanged)
+                    .MarkBalanceChanged(GoldCurrencyMock, Addresses.GoldCurrency, agentAddress);
             }
 
             if (!(states.GetState(agentAddress) is Dictionary agentDict) || !(states.GetState(stageAddress) is Dictionary stageDict))
@@ -37,7 +38,7 @@ namespace LibUnity.Backend.Action
             return states
                 .SetState(stageAddress, stageState.Serialize())
                 .SetState(agentAddress, agentState.Serialize())
-                .MintAsset(agentAddress, states.GetGoldCurrency() * 50);
+                .TransferAsset(Addresses.GoldCurrency, agentAddress, states.GetGoldCurrency() * 50);
         }
 
         protected override IImmutableDictionary<string, IValue> PlainValueInternal => new Dictionary<string, IValue>
