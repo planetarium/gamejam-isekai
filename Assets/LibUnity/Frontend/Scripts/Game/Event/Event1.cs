@@ -12,8 +12,9 @@ namespace LibUnity.Frontend
         {
             successButton.onClick.AddListener((() =>
             {
+                Game.Instance.ActionManager.Conquest(index);
                 SceneLoader.Instnace.Unload("Event");
-                SceneLoader.Instnace.Load("Lobby", () => { Lobby.Instance.ShowResult(true, index); });
+                SceneLoader.Instnace.Load("Lobby");
             }));
 
             failedButton.onClick.AddListener((() =>

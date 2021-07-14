@@ -46,13 +46,21 @@ namespace LibUnity.Frontend.BlockChain
         private void RenderSignUp(BaseAction.ActionEvaluation<SignUp> eval)
         {
             var agent = eval.OutputStates.GetState(Game.Instance.Agent.Address);
-            Debug.Log(agent);
+            Debug.Log($"[RenderSignUp] : {agent}");
         }
 
         private void RenderConquest(BaseAction.ActionEvaluation<Conquest> eval)
         {
-            var agent = eval.OutputStates.GetState(Game.Instance.Agent.Address);
-            Debug.Log(agent);
+            if (eval.Exception is null)
+            {
+                var agent = eval.OutputStates.GetState(Game.Instance.Agent.Address);                
+                Debug.Log($"[RenderConquest] : {agent} ");
+                if (eval.Action != null)
+                {
+                    Lobby.Instance.ShowResult(true, eval.Action.StageLevel);
+                    Debug.Log($"[RenderConquest] LEVEL : {eval.Action.StageLevel}");
+                }
+            }
         }
     }
 }

@@ -57,6 +57,11 @@ public class InfiniteScroll : UIBehaviour
 		}
 	}
 
+	public void Reset()
+	{
+		Start();
+	}
+
 	protected override void Start ()
 	{
 		var controllers = GetComponents<MonoBehaviour>()
@@ -126,11 +131,6 @@ public class InfiniteScroll : UIBehaviour
 			item.anchoredPosition = (direction == Direction.Vertical) ? new Vector2(0, -pos): new Vector2(pos, 0);
 			onUpdateItem.Invoke(currentItemNo, item.gameObject);
 		}
-	}
-
-	public void Test(int test, GameObject go)
-	{
-		Debug.Log($"int : {test} --- go :{go.name}");
 	}
 
 	[System.Serializable]

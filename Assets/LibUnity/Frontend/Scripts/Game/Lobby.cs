@@ -1,5 +1,9 @@
+using System.Collections.Generic;
+using Bencodex.Types;
+using LibUnity.Backend.State;
+using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
+using ObservableExtensions = UniRx.ObservableExtensions;
 
 namespace LibUnity.Frontend
 {
@@ -7,24 +11,67 @@ namespace LibUnity.Frontend
     {
         public static Lobby Instance;
 
-        [FormerlySerializedAs("stageInformationPopup")] [SerializeField] private EventInformationPopup eventInformationPopup;
-        [FormerlySerializedAs("stageResultPopup")] [SerializeField] private EventResultPopup eventResultPopup;
+        [SerializeField] private EventInformationPopup eventInformationPopup;
+        [SerializeField] private EventResultPopup eventResultPopup;
+        [SerializeField] private InfiniteScroll infiniteScroll;
+        [SerializeField] private ItemControllerLimited itemControllerLimited;
+
+        private readonly Dictionary<long, List<StageState.StageHistory>> _stageHistory =
+            new Dictionary<long, List<StageState.StageHistory>>(); 
 
         private void Awake()
         {
             Instance = this;
+            // Game.Instance.Agent.BlockIndex
+            UpdateList();
+            ObservableExtensions.Subscribe(Game.Instance.Agent.BlockIndexSubject, SubscribeBlockIndex).AddTo(gameObject);
         }
 
         public void ShowStageInformation(int index)
         {
+            if (!_stageHistory.ContainsKey(index))
+            {
+                return;
+            }
+            
             eventInformationPopup.gameObject.SetActive(true);
-            eventInformationPopup.Initialize(index);
+            eventInformationPopup.Initialize(index, _stageHistory[index]);
         }
 
         public void ShowResult(bool isSuccess, int index)
         {
+            UpdateList();
             eventResultPopup.gameObject.SetActive(true);
             eventResultPopup.Initialize(isSuccess, index);
+        }
+        
+        private void SubscribeBlockIndex(long blockIndex)
+        {
+            UpdateList();
+        }
+
+        private void UpdateList()
+        {
+            _stageHistory.Clear();
+            var index = 0; 
+            while (true)
+            {
+                var state = Game.Instance.Agent.GetState(StageState.Derive(index));
+                if (state is null)
+                {
+                    break;
+                }
+                
+                var stageState = new StageState((Dictionary) state);
+                if (!_stageHistory.ContainsKey(index))
+                {
+                    _stageHistory.Add(index, stageState.Histories);
+                }
+                index++;
+            }
+
+            itemControllerLimited.Max = index;
+            infiniteScroll.Reset();
         }
     }
 }

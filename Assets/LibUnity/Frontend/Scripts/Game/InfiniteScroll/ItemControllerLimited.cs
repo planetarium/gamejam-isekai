@@ -6,8 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(InfiniteScroll))]
 public class ItemControllerLimited : UIBehaviour, IInfiniteScrollSetup {
 
-	[SerializeField, Range(1, 999)]
-	private int max = 30;
+	public long Max { get; set; }
 
 	public void OnPostSetupItems()
 	{
@@ -17,13 +16,13 @@ public class ItemControllerLimited : UIBehaviour, IInfiniteScrollSetup {
 
 		var rectTransform = GetComponent<RectTransform>();
 		var delta = rectTransform.sizeDelta;
-		delta.y = infiniteScroll.itemScale * max;
+		delta.y = infiniteScroll.itemScale * Max;
 		rectTransform.sizeDelta = delta;
 	}
 
 	public void OnUpdateItem(int itemCount, GameObject obj)
 	{
-		if(itemCount < 0 || itemCount >= max) {
+		if(itemCount < 0 || itemCount >= Max) {
 			obj.SetActive (false);
 		}
 		else {

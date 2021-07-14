@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Text;
+using LibUnity.Backend.State;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -7,15 +10,26 @@ namespace LibUnity.Frontend
 {
     public class EventInformationPopup : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI eventText;
+        [SerializeField] private TextMeshProUGUI eventIndexText;
+        [SerializeField] private TextMeshProUGUI eventContent;
+        [SerializeField] private TextMeshProUGUI eventHistory;
         [SerializeField] private Button startButton;
         [SerializeField] private Button closeButton;
         [SerializeField] private Button bgButton;
 
-        public void Initialize(int index)
+        public void Initialize(int index, IEnumerable<StageState.StageHistory> histories)
         {
-            eventText.text = $"{index + 1} Event";
-            
+            eventIndexText.text = $"{index + 1}";
+            eventContent.text = $"{index + 1} 이벤트 설명은 아직 준비중입니다";
+            var sb = new StringBuilder();
+            foreach (var history in histories)
+            {
+                var conquestBlockIndex = history.ConquestBlockIndex;
+                var address = history.AgentAddress.ToHex().Substring(0, 4);
+                sb.Append($"{conquestBlockIndex} 블록 : {address}가 {StageState.ConquestInterval}블록동안 점령\n");
+            }
+            eventHistory.text = sb.ToString();
+
             startButton.onClick.AddListener(() =>
             {
                 SceneLoader.Instnace.Unload("Lobby");
