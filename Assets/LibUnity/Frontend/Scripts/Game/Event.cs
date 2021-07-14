@@ -29,8 +29,9 @@ namespace LibUnity.Frontend
 
         private void LoadStage(int index)
         {
-            var id = events.Count > index ? index : 0; 
-            var go = Instantiate(events[id], Vector3.zero, Quaternion.identity);
+            // var id = events.Count > index ? index : 0; 
+            // var go = Instantiate(events[id], Vector3.zero, Quaternion.identity);
+            var go = Instantiate(events[index % 2], Vector3.zero, Quaternion.identity);
             go.transform.SetParent(transform);
             go.GetComponent<IEvent>().Initialize(ShowResult);
         }
