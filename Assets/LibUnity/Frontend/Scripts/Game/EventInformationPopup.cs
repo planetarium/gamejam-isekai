@@ -1,30 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using LibUnity.Backend.Action;
 using LibUnity.Backend.State;
-using LibUnity.Frontend.BlockChain;
-using LibUnity.Frontend.State;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace LibUnity.Frontend
 {
     public class EventInformationPopup : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI eventIndexText;
-        [SerializeField] private TextMeshProUGUI eventContent;
-        [SerializeField] private TextMeshProUGUI eventHistory;
+        [SerializeField] private Text eventIndexText;
+        [SerializeField] private Text eventTheme;
+        [SerializeField] private Text eventHistory;
         [SerializeField] private Button startButton;
         [SerializeField] private Button closeButton;
-        [SerializeField] private Button bgButton;
+
+        
 
         public void Initialize(int index, IEnumerable<StageState.StageHistory> histories)
         {
             eventIndexText.text = $"{index + 1}";
-            eventContent.text = $"{index + 1} 이벤트 설명은 아직 준비중입니다";
+            eventTheme.text = $"별똥별 터뜨리기";
             var sb = new StringBuilder();
             foreach (var history in histories)
             {
@@ -40,24 +36,20 @@ namespace LibUnity.Frontend
                 if (histories.Any() &&
                     histories.Last().ConquestBlockIndex + StageState.ConquestInterval> Game.Instance.Agent.BlockIndex)
                 {
-                    var standard = histories.Last().ConquestBlockIndex + StageState.ConquestInterval;
-                    Lobby.Instance.ShowNotification($"아직 점령할 수 없습니다 {standard}블록 이후부터 점령가능");
+                    var name = histories.Last().AgentAddress.ToHex().Substring(0, 4);
+                    // var standard = histories.Last().ConquestBlockIndex + StageState.ConquestInterval;
+                    Lobby.Instance.ShowNotification($"{name}가 점령하고 있습니다.");
                     return;
                 }
                 
                 SceneLoader.Instnace.Unload("Lobby");
                 SceneLoader.Instnace.Load("Event", () =>
                 {
-                    Event.Instance.Initialize(index, eventContent.text);
+                    Event.Instance.Initialize(index, eventTheme.text);
                 });
             });
 
             closeButton.onClick.AddListener(() =>
-            {
-                gameObject.SetActive(false);
-            });
-            
-            bgButton.onClick.AddListener(() =>
             {
                 gameObject.SetActive(false);
             });
@@ -67,7 +59,6 @@ namespace LibUnity.Frontend
         {
             startButton.onClick.RemoveAllListeners();
             closeButton.onClick.RemoveAllListeners();
-            bgButton.onClick.RemoveAllListeners();
         }
     }
 }

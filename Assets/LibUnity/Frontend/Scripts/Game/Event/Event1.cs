@@ -1,38 +1,156 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace LibUnity.Frontend
 {
     public class Event1 : MonoBehaviour, IEvent
     {
-        [SerializeField] private Button successButton;
-        [SerializeField] private Button failedButton;
+        [SerializeField] private Text eventContentsText;
+        [SerializeField] private Text countdownText;
+        [SerializeField] private Text timeText;
+        [SerializeField] private Text scoreText;
+        [SerializeField] private GameObject timeOver;
 
+        [SerializeField] private List<GameObject> planets = new List<GameObject>();
+        [SerializeField] private List<GameObject> bombs = new List<GameObject>();
+        [SerializeField] private List<GameObject> planetEffects = new List<GameObject>();
+        [SerializeField] private List<GameObject> bombEffects = new List<GameObject>();
+
+        [SerializeField] [Range(0, 99)] private int bombDropProbability = 10;
+        [SerializeField] private int targetScore = 500;
+        [SerializeField] private int planetScore;
+        [SerializeField] private int bombScore;
+        
         private Action<bool> _result;
+
+        private float _totalTime = 30;
+        private float _timer;
+        private int _margin = 100;
+        private int _totalScore;
+        private bool _timeOver = true;
+        
+        
+        
         
         public void Initialize(Action<bool> callback)
         {
             _result = callback;
-            
-            successButton.onClick.AddListener((() =>
-            {
-                callback?.Invoke(true);
-                
-                // Event.Instance.ShowResult(true, index, contents);
-                
-                
-                // SceneLoader.Instnace.Unload("Event");
-                // SceneLoader.Instnace.Load("Lobby");
-            }));
+            _timer = _totalTime;
+            _totalScore = 0;
+            eventContentsText.text = $"별풍선을 터뜨려서 {targetScore}점 이상 달성하세요!!";
+            timeText.text = _timer.ToString();
+            scoreText.text = 0.ToString();
 
-            failedButton.onClick.AddListener((() =>
+            foreach (var planet in planets)
             {
-                callback?.Invoke(false);
-                // Event.Instance.ShowResult(false, index, contents);
-                // SceneLoader.Instnace.Unload("Event");
-                // SceneLoader.Instnace.Load("Lobby", () => {  });
-            }));
+                planet.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    AddScore(planetScore);
+                    planet.SetActive(false);
+                    ActiveObject(planetEffects, planet.transform.position);
+                });
+            }
+            
+            foreach (var bomb in bombs)
+            {
+                bomb.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    AddScore(bombScore);
+                    bomb.SetActive(false);
+                    ActiveObject(bombEffects, bomb.transform.position);
+                });
+            }
+            
+            StartCoroutine(Loop());
+        }
+
+        private void AddScore(int score)
+        {
+            _totalScore += score;
+            scoreText.text = _totalScore.ToString();
+        }
+
+        private IEnumerator Loop()
+        {
+            countdownText.text = "3";
+            yield return new WaitForSeconds(1.0f);
+            countdownText.text = "2";
+            yield return new WaitForSeconds(1.0f);
+            countdownText.text = "1";
+            yield return new WaitForSeconds(1.0f);
+            countdownText.text = "START!";
+            yield return new WaitForSeconds(1.0f);
+            countdownText.gameObject.SetActive(false);
+            _timeOver = false;
+            
+            while (true)
+            {
+                if (_timeOver)
+                {
+                    yield break;
+                }
+                
+                var x = Random.Range(_margin, Screen.width - _margin);
+                var y = Random.Range(_margin, Screen.height - _margin);
+                ActiveObject(Random.Range(0, 100) > bombDropProbability ? planets : bombs, new Vector3(x, y, 0));
+                var ratio = _timer / _totalTime;
+                var acceleration = Mathf.Max(ratio * ratio, 0.2f);
+                yield return new WaitForSeconds(2.0f * acceleration);
+            }
+        }
+
+        private void ActiveObject(IEnumerable<GameObject> objects, Vector3 position)
+        {
+            var obj = objects.FirstOrDefault(x => !x.activeSelf);
+            if (obj != null)
+            {
+                obj.transform.position = position;
+                obj.gameObject.SetActive(true);
+            }
+        }
+
+        public void Update()
+        {
+            if (_timeOver)
+            {
+                return;
+            }
+            
+            _timer -= Time.unscaledDeltaTime;
+            if (_timer <= 0)
+            {
+                _timer = 0;
+                _timeOver = true;
+                timeOver.gameObject.SetActive(true);
+                StartCoroutine(ShowResult());
+            }
+            
+            var time = (int) _timer;
+            timeText.text = time.ToString();
+        }
+
+        private IEnumerator ShowResult()
+        {
+            yield return new WaitForSeconds(1);
+            _result?.Invoke(_totalScore > targetScore);
+        }
+
+        private void OnDisable()
+        {
+            foreach (var planet in planets)
+            {
+                planet.GetComponent<Button>().onClick.RemoveAllListeners();
+            }
+            
+            foreach (var bomb in bombs)
+            {
+                bomb.GetComponent<Button>().onClick.RemoveAllListeners();
+            }
         }
     }
 }

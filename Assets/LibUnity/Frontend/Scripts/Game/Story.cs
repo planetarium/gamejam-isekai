@@ -10,11 +10,11 @@ namespace LibUnity.Frontend
     {
         public static Story Instance;
 
-        [SerializeField] private TextMeshProUGUI eventIndexText;
-        [SerializeField] private TextMeshProUGUI storyThemeText;
-        [SerializeField] private TextMeshProUGUI storyText;
-        [SerializeField] private TextMeshProUGUI progressText;
-        [SerializeField] private Image progressBar;
+        [SerializeField] private Text eventIndexText;
+        [SerializeField] private Text storyThemeText;
+        [SerializeField] private Text storyText;
+        [SerializeField] private Text progressText;
+        [SerializeField] private Slider progressBar;
         [SerializeField] private List<string> story = new List<string>();
         [SerializeField] private float typingPlaySpeed = 0.1f;
         [SerializeField] private float typingRewindSpeed = 0.1f;

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 35c9c46ac12382b43af49cd25730c76c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - HCR Batang
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: e4f7f954c57861041b7b7a42bfad440f, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

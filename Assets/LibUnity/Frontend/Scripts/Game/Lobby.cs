@@ -71,15 +71,17 @@ namespace LibUnity.Frontend
             infiniteScroll.Reset();
         }
 
-        public string GetConqueror(int index)
+        public bool TryGetConqueror(int index, out string conqueror)
         {
+            conqueror = string.Empty;
             if (!_stageHistory.ContainsKey(index))
             {
-                return string.Empty;
+                return false;
             }
             
             var histories = _stageHistory[index];
-            return histories.Count > 0 ? histories.Last().AgentAddress.ToHex().Substring(0, 4) : string.Empty;
+            conqueror = histories.Count > 0 ? histories.Last().AgentAddress.ToHex().Substring(0, 4) : string.Empty;
+            return histories.Count > 0;
         }
 
         public void ShowNotification(string message)
