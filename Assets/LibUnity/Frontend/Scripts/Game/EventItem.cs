@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LibUnity.Backend.State;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -46,12 +47,23 @@ namespace LibUnity.Frontend
             stageText.text = (index + 1).ToString();
 
             Color color;
-            if (Lobby.Instance.TryGetConqueror(index, out var conqueror))
+            if (Lobby.Instance.TryGetLastHistory(index, out var history))
             {
-                ColorUtility.TryParseHtmlString("#580004", out color);
-                conquerorText.text = conqueror;
-                withConquerorIcon.SetActive(true);
-                emptyIcon.SetActive(false);
+                if (history.ConquestBlockIndex + StageState.ConquestInterval > Game.Instance.Agent.BlockIndex)
+                {
+                    ColorUtility.TryParseHtmlString("#580004", out color);    
+                    withConquerorIcon.SetActive(true);
+                    emptyIcon.SetActive(false);
+                }
+                else
+                {
+                    ColorUtility.TryParseHtmlString("#060b3d", out color);
+                    withConquerorIcon.SetActive(false);
+                    emptyIcon.SetActive(true);
+                }
+
+                var address = history.AgentAddress.ToHex().Substring(0, 4);
+                conquerorText.text = $"#{address}";
                 conquerorIcon.SetActive(true);
             }
             else

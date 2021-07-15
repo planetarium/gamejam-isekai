@@ -21,9 +21,9 @@ namespace LibUnity.Frontend
         [SerializeField] private ItemControllerLimited itemControllerLimited;
         [SerializeField] private Text goldText;
         [SerializeField] private Text messageText;
-        
+
         private Currency _currency;
-        
+
         private readonly Dictionary<long, List<StageState.StageHistory>> _stageHistory =
             new Dictionary<long, List<StageState.StageHistory>>();
 
@@ -62,7 +62,8 @@ namespace LibUnity.Frontend
             var address = Game.Instance.Agent.Address;
             if (_currency.Equals(default))
             {
-                _currency = new GoldCurrencyState((Dictionary) Game.Instance.Agent.GetState(Addresses.GoldCurrency)).Currency;
+                _currency = new GoldCurrencyState((Dictionary) Game.Instance.Agent.GetState(Addresses.GoldCurrency))
+                    .Currency;
             }
 
             var balance = Game.Instance.Agent.GetBalance(address, _currency);
@@ -99,16 +100,20 @@ namespace LibUnity.Frontend
             infiniteScroll.Reset();
         }
 
-        public bool TryGetConqueror(int index, out string conqueror)
+        public bool TryGetLastHistory(int index, out StageState.StageHistory history)
         {
-            conqueror = string.Empty;
+            history = new StageState.StageHistory();
             if (!_stageHistory.ContainsKey(index))
             {
                 return false;
             }
-            
+
             var histories = _stageHistory[index];
-            conqueror = histories.Count > 0 ? $"#{histories.Last().AgentAddress.ToHex().Substring(0, 4)}" : string.Empty;
+            if (histories.Count > 0)
+            {
+                history = histories.Last();
+            }
+
             return histories.Count > 0;
         }
 
