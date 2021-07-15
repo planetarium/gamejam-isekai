@@ -761,6 +761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1225345922}
   - component: {fileID: 1225345923}
+  - component: {fileID: 1225345924}
   m_Layer: 0
   m_Name: Prologue
   m_TagString: Untagged
@@ -819,14 +820,109 @@ MonoBehaviour:
     \uADF8\uACF3\uC5D4 \uC544\uBB34\uB7F0 \uC0DD\uBA85 \uBC18\uC751\uC740 \uBC1C\uACAC\uB418\uC9C0
     \uC54A\uC558\uC9C0\uB9CC,\n\uD574\uB3C5\uD560 \uC218 \uC788\uB294 \uC5EC\uB7EC
     \uAE30\uD638\uB4E4\uB9CC\uC774 \uB0A8\uC544\uC788\uC5C8\uC2B5\uB2C8\uB2E4.\n\n\uAE30\uD638\uB4E4\uC740
-    \uC6B0\uC8FC\uC120\uC5D0 \uB0A8\uC544\uC788\uB358 \uC778\uB958\uC758 \uC608\uC804
-    \uAE30\uB85D\uC73C\uB85C \uD574\uB3C5\uD560 \uC218 \uC788\uB294,\n\uC77C\uC885\uC758
-    \uD37C\uC990\uACFC \uAC19\uC740 \uAC83\uB4E4\uC774\uC5C8\uC2B5\uB2C8\uB2E4.\n\n\uADF8\uB9AC\uACE0
-    \uC0AC\uB78C\uB4E4\uC740 \uC5B4\uB290\uC0C8 \uC774 \uBB38\uC81C\uB97C \uD478\uB294
-    \uC77C\uB85C\n\uC624\uB79C \uC6B0\uC8FC \uC0DD\uD65C\uC5D0\uC11C \uC783\uC5B4\uBC84\uB838\uB358,
-    '\uC7AC\uBBF8' \uB77C\uB294 \uAC10\uC815\uC744\n\uB2E4\uC2DC \uAE68\uB2EB\uAC8C
-    \uB418\uC5C8\uC2B5\uB2C8\uB2E4."
+    \uC6B0\uC8FC\uC120\uC5D0 \uB0A8\uC544\uC788\uB358 \uC778\uB958\uC758 \uAE30\uB85D\uC73C\uB85C
+    \uD574\uB3C5 \uAC00\uB2A5\uD55C,\n\uC77C\uC885\uC758 \uD37C\uC990\uACFC \uAC19\uC740
+    \uAC83\uB4E4\uC774\uC5C8\uC2B5\uB2C8\uB2E4.\n\n\uADF8\uB9AC\uACE0 \uC0AC\uB78C\uB4E4\uC740
+    \uC5B4\uB290\uC0C8 \uC774 \uBB38\uC81C\uB97C \uD478\uB294 \uC77C\uB85C\n\uC624\uB79C
+    \uC6B0\uC8FC \uC0DD\uD65C\uC5D0\uC11C \uC783\uC5B4\uBC84\uB838\uB358, '\uC7AC\uBBF8'
+    \uB77C\uB294 \uAC10\uC815\uC744\n\uB2E4\uC2DC \uAE68\uB2EB\uAC8C \uB418\uC5C8\uC2B5\uB2C8\uB2E4."
   typingSpeed: 0.1
+--- !u!82 &1225345924
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225345921}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1ac608a89e8c0498f9c4534ab97ca2e4, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.8
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1341849078
 GameObject:
   m_ObjectHideFlags: 0
