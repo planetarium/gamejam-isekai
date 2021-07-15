@@ -2,20 +2,28 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace LibUnity.Frontend
 {
     public class Story : MonoBehaviour
     {
+        [Serializable]
+        public class StoryInfo
+        {
+            [TextArea] public string title;
+            [TextArea] public string content;
+        }
+        
         public static Story Instance;
 
         [SerializeField] private Text eventIndexText;
-        [SerializeField] private Text storyThemeText;
+        [SerializeField] private Text storyTitleText;
         [SerializeField] private Text storyText;
         [SerializeField] private Text progressText;
         [SerializeField] private Slider progressBar;
-        [TextArea] [SerializeField] private List<string> story = new List<string>();
+        [SerializeField] private List<StoryInfo> story = new List<StoryInfo>();
         [SerializeField] private float typingPlaySpeed = 0.1f;
         [SerializeField] private float typingRewindSpeed = 0.1f;
         [SerializeField] private Button confirmButton;
@@ -34,9 +42,10 @@ namespace LibUnity.Frontend
             action?.Invoke();
             _isDone = false;
             eventIndexText.text = (index + 1).ToString();
-            storyThemeText.text = "스토리 제목을 넣어주세요";
 
-            _selectedStory = story.Count > index ? story[index] : story[0];
+            var idx = story.Count > index ? index : 0;
+            storyTitleText.text = story[idx].title;
+            _selectedStory = story[idx].content; 
             _coroutine = StartCoroutine(TextTyper.PlayWithResource(storyText, _selectedStory, typingPlaySpeed,
                 progressBar,
                 progressText, ActionRenderResult));
