@@ -8,7 +8,7 @@ namespace LibUnity.Frontend
     {
         [SerializeField] private Text text;
         [SerializeField] private Button skipButton;
-        [SerializeField] private string synopsis = "스토리를 넣어주세요"; 
+        [TextArea] [SerializeField] private string synopsis = "스토리를 넣어주세요"; 
         [SerializeField] private float typingSpeed = 0.1f;
 
         private Coroutine _coroutine;

@@ -15,7 +15,7 @@ namespace LibUnity.Frontend
         [SerializeField] private Text storyText;
         [SerializeField] private Text progressText;
         [SerializeField] private Slider progressBar;
-        [SerializeField] private List<string> story = new List<string>();
+        [TextArea] [SerializeField] private List<string> story = new List<string>();
         [SerializeField] private float typingPlaySpeed = 0.1f;
         [SerializeField] private float typingRewindSpeed = 0.1f;
         [SerializeField] private Button confirmButton;
