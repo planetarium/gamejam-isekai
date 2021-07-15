@@ -8,7 +8,6 @@ namespace LibUnity.Frontend
     {
         public static Event Instance;
 
-        [SerializeField] private TextMeshProUGUI eventText;
         [SerializeField] private List<GameObject> events = new List<GameObject>();
         [SerializeField] private EventResultPopup eventResultPopup;
 
@@ -23,7 +22,6 @@ namespace LibUnity.Frontend
         public void Initialize(int index, string contents)
         {
             _eventInfo = (index, contents);
-            eventText.text = $"{index + 1} Event";
             LoadStage(index);
         }
 
@@ -33,7 +31,7 @@ namespace LibUnity.Frontend
             // var go = Instantiate(events[id], Vector3.zero, Quaternion.identity);
             var go = Instantiate(events[index % 2], Vector3.zero, Quaternion.identity);
             go.transform.SetParent(transform);
-            go.GetComponent<IEvent>().Initialize(ShowResult);
+            go.GetComponent<IEvent>().Initialize(index, ShowResult);
         }
 
         private void ShowResult(bool isSuccess)

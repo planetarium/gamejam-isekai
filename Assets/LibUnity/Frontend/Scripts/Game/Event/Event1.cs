@@ -10,6 +10,7 @@ namespace LibUnity.Frontend
 {
     public class Event1 : MonoBehaviour, IEvent
     {
+        [SerializeField] private Text eventIndexText;
         [SerializeField] private Text eventContentsText;
         [SerializeField] private Text countdownText;
         [SerializeField] private Text timeText;
@@ -25,7 +26,7 @@ namespace LibUnity.Frontend
         [SerializeField] private int targetScore = 500;
         [SerializeField] private int planetScore;
         [SerializeField] private int bombScore;
-        
+
         private Action<bool> _result;
 
         private float _totalTime = 30;
@@ -34,14 +35,12 @@ namespace LibUnity.Frontend
         private int _totalScore;
         private bool _timeOver = true;
         
-        
-        
-        
-        public void Initialize(Action<bool> callback)
+        public void Initialize(int index, Action<bool> callback)
         {
             _result = callback;
             _timer = _totalTime;
             _totalScore = 0;
+            eventIndexText.text = (index + 1).ToString();
             eventContentsText.text = $"별풍선을 터뜨려서 {targetScore}점 이상 달성하세요!!";
             timeText.text = _timer.ToString();
             scoreText.text = 0.ToString();
@@ -55,7 +54,7 @@ namespace LibUnity.Frontend
                     ActiveObject(planetEffects, planet.transform.position);
                 });
             }
-            
+
             foreach (var bomb in bombs)
             {
                 bomb.GetComponent<Button>().onClick.AddListener(() =>
@@ -65,7 +64,7 @@ namespace LibUnity.Frontend
                     ActiveObject(bombEffects, bomb.transform.position);
                 });
             }
-            
+
             StartCoroutine(Loop());
         }
 
@@ -87,14 +86,14 @@ namespace LibUnity.Frontend
             yield return new WaitForSeconds(1.0f);
             countdownText.gameObject.SetActive(false);
             _timeOver = false;
-            
+
             while (true)
             {
                 if (_timeOver)
                 {
                     yield break;
                 }
-                
+
                 var x = Random.Range(_margin, Screen.width - _margin);
                 var y = Random.Range(_margin, Screen.height - _margin);
                 ActiveObject(Random.Range(0, 100) > bombDropProbability ? planets : bombs, new Vector3(x, y, 0));
@@ -120,7 +119,7 @@ namespace LibUnity.Frontend
             {
                 return;
             }
-            
+
             _timer -= Time.unscaledDeltaTime;
             if (_timer <= 0)
             {
@@ -129,7 +128,7 @@ namespace LibUnity.Frontend
                 timeOver.gameObject.SetActive(true);
                 StartCoroutine(ShowResult());
             }
-            
+
             var time = (int) _timer;
             timeText.text = time.ToString();
         }
@@ -146,7 +145,7 @@ namespace LibUnity.Frontend
             {
                 planet.GetComponent<Button>().onClick.RemoveAllListeners();
             }
-            
+
             foreach (var bomb in bombs)
             {
                 bomb.GetComponent<Button>().onClick.RemoveAllListeners();

@@ -10,6 +10,7 @@ namespace LibUnity.Frontend
 {
     public class Event2 : MonoBehaviour, IEvent
     {
+        [SerializeField] private Text eventIndexText;
         [SerializeField] private Text eventContentsText;
         [SerializeField] private Text countdownText;
         [SerializeField] private Text timeText;
@@ -25,7 +26,7 @@ namespace LibUnity.Frontend
         private int _margin = 100;
         private bool _timeOver = true;
         
-        public void Initialize(Action<bool> callback)
+        public void Initialize(int index, Action<bool> callback)
         {
             _result = callback;
             _timer = _totalTime;

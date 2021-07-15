@@ -4,6 +4,6 @@ namespace LibUnity.Frontend
 {
     public interface IEvent
     {
-        public void Initialize(Action<bool> callback);
+        public void Initialize(int index, Action<bool> callback);
     }
 }
