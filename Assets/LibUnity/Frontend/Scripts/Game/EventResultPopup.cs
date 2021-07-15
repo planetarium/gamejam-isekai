@@ -20,6 +20,7 @@ namespace LibUnity.Frontend
             
             if (isSuccess)
             {
+                success.SetActive(true);
                 rewardsText.text = "50";
                 sendResultButton.onClick.AddListener(() =>
                 {
@@ -33,6 +34,7 @@ namespace LibUnity.Frontend
             }
             else
             {
+                failed.SetActive(true);
                 rewardsText.text = "0";
                 sendResultButton.onClick.AddListener(() =>
                 {

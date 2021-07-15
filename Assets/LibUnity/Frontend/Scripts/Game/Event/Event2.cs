@@ -23,12 +23,18 @@ namespace LibUnity.Frontend
         [SerializeField] private List<Sprite> numbers = new List<Sprite>();
         
         private Action<bool, EventInfo> _result;
-
+        private AudioSource _audioSource;
+        
         private float _totalTime = 30;
         private float _timer;
         private int _margin = 100;
         private int _index;
         private bool _timeOver = true;
+        
+        private void Awake()
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
         
         public void Initialize(int index, Action<bool, EventInfo> callback)
         {
@@ -96,6 +102,7 @@ namespace LibUnity.Frontend
 
             if (character.IsDead)
             {
+                _audioSource.Stop();
                 _result?.Invoke(false, new EventInfo(_index, 0, (int)_timer));
                 _timeOver = true;
             }
@@ -115,6 +122,7 @@ namespace LibUnity.Frontend
 
         private IEnumerator ShowResult()
         {
+            _audioSource.Stop();
             yield return new WaitForSeconds(1);
             _result?.Invoke(true, new EventInfo(_index, 0, 0));
         }

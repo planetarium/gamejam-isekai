@@ -30,6 +30,7 @@ namespace LibUnity.Frontend
         [SerializeField] private int bombScore;
 
         private Action<bool, EventInfo> _result;
+        private AudioSource _audioSource;
 
         private float _totalTime = 30;
         private float _timer;
@@ -37,7 +38,12 @@ namespace LibUnity.Frontend
         private int _totalScore;
         private int _index;
         private bool _timeOver = true;
-        
+
+        private void Awake()
+        {
+            _audioSource = GetComponent<AudioSource>();
+        }
+
         public void Initialize(int index, Action<bool, EventInfo> callback)
         {
             _index = index;
@@ -137,6 +143,7 @@ namespace LibUnity.Frontend
 
         private IEnumerator ShowResult()
         {
+            _audioSource.Stop();
             yield return new WaitForSeconds(1);
             _result?.Invoke(_totalScore > targetScore, new EventInfo(_index, _totalScore, 0));
         }
