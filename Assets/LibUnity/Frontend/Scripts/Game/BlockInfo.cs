@@ -43,13 +43,7 @@ public class BlockInfo : MonoBehaviour
     private void UpdateText()
     {
         Debug.Log("UpdateText");
-        var address = Game.Instance.Agent.Address;
-        if (_currency.Equals(default))
-        {
-            _currency = new GoldCurrencyState((Dictionary) Game.Instance.Agent.GetState(Addresses.GoldCurrency)).Currency;
-        }
-
-        var balance = Game.Instance.Agent.GetBalance(address, _currency);
-        informationText.text = $"Block index : <color=#FF0000>{_blockIndex}</color> / Hash: <color=#FF0000>{_hash.ToString()}</color> / Balance: {balance.GetQuantityString()}";;
+        
+        informationText.text = $"Block index : <color=#FF0000>{_blockIndex}</color> / Hash: <color=#FF0000>{_hash.ToString()}</color>";;
     }
 }

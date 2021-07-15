@@ -12,40 +12,44 @@ namespace LibUnity.Frontend
     {
         [SerializeField] private Text eventIndexText;
         [SerializeField] private Text eventContentsText;
-        [SerializeField] private Text countdownText;
         [SerializeField] private Text timeText;
         [SerializeField] private GameObject timeOver;
 
         [SerializeField] private List<GameObject> stones = new List<GameObject>();
+        [SerializeField] private List<GameObject> effects = new List<GameObject>();
         [SerializeField] private Event2Character character;
+
+        [SerializeField] private Image count;
+        [SerializeField] private List<Sprite> numbers = new List<Sprite>();
         
-        private Action<bool> _result;
+        private Action<bool, EventInfo> _result;
 
         private float _totalTime = 30;
         private float _timer;
         private int _margin = 100;
+        private int _index;
         private bool _timeOver = true;
         
-        public void Initialize(int index, Action<bool> callback)
+        public void Initialize(int index, Action<bool, EventInfo> callback)
         {
+            _index = index;
             _result = callback;
             _timer = _totalTime;
-            eventContentsText.text = $"제한시간동안 돌을 피해보세요!!";
+            eventIndexText.text = (index + 1).ToString();
+            eventContentsText.text = $"제한시간동안 똥을 피해보세요!!";
             timeText.text = _timer.ToString();
             StartCoroutine(Loop());
         }
 
         private IEnumerator Loop()
         {
-            countdownText.text = "3";
+            count.sprite = numbers[0];
             yield return new WaitForSeconds(1.0f);
-            countdownText.text = "2";
+            count.sprite = numbers[1];
             yield return new WaitForSeconds(1.0f);
-            countdownText.text = "1";
+            count.sprite = numbers[2];
             yield return new WaitForSeconds(1.0f);
-            countdownText.text = "START!";
-            yield return new WaitForSeconds(1.0f);
-            countdownText.gameObject.SetActive(false);
+            count.gameObject.SetActive(false);
             _timeOver = false;
             
             while (true)
@@ -57,14 +61,22 @@ namespace LibUnity.Frontend
                 
                 var x = Random.Range(_margin, Screen.width - _margin);
                 var y = Screen.height + 100;
-                ActiveObject(stones,new Vector3(x, y, 0));
+                var obj = ActiveObject(stones,new Vector3(x, y, 0));
+                if (obj != null)
+                {
+                    var stone = obj.GetComponent<Event2Stone>();
+                    stone.Initialize((position) =>
+                    {
+                        ActiveObject(effects, position);
+                    });
+                }
                 var ratio = _timer / _totalTime;
                 var acceleration = Mathf.Max(ratio * ratio, 0.05f);
                 yield return new WaitForSeconds(1.0f * acceleration);
             }
         }
 
-        private void ActiveObject(IEnumerable<GameObject> objects, Vector3 position)
+        private GameObject ActiveObject(IEnumerable<GameObject> objects, Vector3 position)
         {
             var obj = objects.FirstOrDefault(x => !x.activeSelf);
             if (obj != null)
@@ -72,6 +84,7 @@ namespace LibUnity.Frontend
                 obj.transform.position = position;
                 obj.gameObject.SetActive(true);
             }
+            return obj;
         }
 
         public void Update()
@@ -83,7 +96,7 @@ namespace LibUnity.Frontend
 
             if (character.IsDead)
             {
-                _result?.Invoke(false);
+                _result?.Invoke(false, new EventInfo(_index, 0, (int)_timer));
                 _timeOver = true;
             }
             
@@ -103,7 +116,7 @@ namespace LibUnity.Frontend
         private IEnumerator ShowResult()
         {
             yield return new WaitForSeconds(1);
-            _result?.Invoke(true);
+            _result?.Invoke(true, new EventInfo(_index, 0, 0));
         }
     }
 }

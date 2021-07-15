@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,10 +8,15 @@ namespace LibUnity.Frontend
     {
         private float _speed = 400;
         private Vector2 _direction;
+        [SerializeField] private GameObject idle;
+        [SerializeField] private GameObject dead;
+        
         public bool IsDead { get; private set; }
 
         private void Awake()
         {
+            idle.SetActive(true);
+            dead.SetActive(false);
             IsDead = false;
         }
 
@@ -33,6 +39,9 @@ namespace LibUnity.Frontend
             if (other.collider.tag.Equals("Stone"))
             {
                 IsDead = true;
+                idle.SetActive(false);
+                dead.SetActive(true);
+                transform.DOShakePosition(5,3, 50);
             }
         }
     }

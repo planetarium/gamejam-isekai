@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bencodex.Types;
+using Libplanet;
+using Libplanet.Assets;
+using LibUnity.Backend;
 using LibUnity.Backend.State;
 using UniRx;
 using UnityEngine;
 using ObservableExtensions = UniRx.ObservableExtensions;
+using Text = UnityEngine.UI.Text;
 
 namespace LibUnity.Frontend
 {
@@ -16,7 +20,10 @@ namespace LibUnity.Frontend
         [SerializeField] private EventInformationPopup eventInformationPopup;
         [SerializeField] private InfiniteScroll infiniteScroll;
         [SerializeField] private ItemControllerLimited itemControllerLimited;
-
+        [SerializeField] private Text goldText;
+        
+        private Currency _currency;
+        
         private readonly Dictionary<long, List<StageState.StageHistory>> _stageHistory =
             new Dictionary<long, List<StageState.StageHistory>>();
 
@@ -24,6 +31,7 @@ namespace LibUnity.Frontend
         {
             Instance = this;
             UpdateList();
+            UpdateBalance();
             ObservableExtensions.Subscribe(Game.Instance.Agent.BlockIndexSubject, SubscribeBlockIndex)
                 .AddTo(gameObject);
         }
@@ -44,6 +52,19 @@ namespace LibUnity.Frontend
         private void SubscribeBlockIndex(long blockIndex)
         {
             UpdateList();
+            UpdateBalance();
+        }
+
+        private void UpdateBalance()
+        {
+            var address = Game.Instance.Agent.Address;
+            if (_currency.Equals(default))
+            {
+                _currency = new GoldCurrencyState((Dictionary) Game.Instance.Agent.GetState(Addresses.GoldCurrency)).Currency;
+            }
+
+            var balance = Game.Instance.Agent.GetBalance(address, _currency);
+            goldText.text = balance.GetQuantityString();
         }
 
         private void UpdateList()

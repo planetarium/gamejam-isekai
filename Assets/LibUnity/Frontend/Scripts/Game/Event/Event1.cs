@@ -12,7 +12,6 @@ namespace LibUnity.Frontend
     {
         [SerializeField] private Text eventIndexText;
         [SerializeField] private Text eventContentsText;
-        [SerializeField] private Text countdownText;
         [SerializeField] private Text timeText;
         [SerializeField] private Text scoreText;
         [SerializeField] private GameObject timeOver;
@@ -21,22 +20,27 @@ namespace LibUnity.Frontend
         [SerializeField] private List<GameObject> bombs = new List<GameObject>();
         [SerializeField] private List<GameObject> planetEffects = new List<GameObject>();
         [SerializeField] private List<GameObject> bombEffects = new List<GameObject>();
+        
+        [SerializeField] private Image count;
+        [SerializeField] private List<Sprite> numbers = new List<Sprite>();
 
         [SerializeField] [Range(0, 99)] private int bombDropProbability = 10;
         [SerializeField] private int targetScore = 500;
         [SerializeField] private int planetScore;
         [SerializeField] private int bombScore;
 
-        private Action<bool> _result;
+        private Action<bool, EventInfo> _result;
 
         private float _totalTime = 30;
         private float _timer;
         private int _margin = 100;
         private int _totalScore;
+        private int _index;
         private bool _timeOver = true;
         
-        public void Initialize(int index, Action<bool> callback)
+        public void Initialize(int index, Action<bool, EventInfo> callback)
         {
+            _index = index;
             _result = callback;
             _timer = _totalTime;
             _totalScore = 0;
@@ -76,15 +80,13 @@ namespace LibUnity.Frontend
 
         private IEnumerator Loop()
         {
-            countdownText.text = "3";
+            count.sprite = numbers[0];
             yield return new WaitForSeconds(1.0f);
-            countdownText.text = "2";
+            count.sprite = numbers[1];
             yield return new WaitForSeconds(1.0f);
-            countdownText.text = "1";
+            count.sprite = numbers[2];
             yield return new WaitForSeconds(1.0f);
-            countdownText.text = "START!";
-            yield return new WaitForSeconds(1.0f);
-            countdownText.gameObject.SetActive(false);
+            count.gameObject.SetActive(false);
             _timeOver = false;
 
             while (true)
@@ -95,7 +97,7 @@ namespace LibUnity.Frontend
                 }
 
                 var x = Random.Range(_margin, Screen.width - _margin);
-                var y = Random.Range(_margin, Screen.height - _margin);
+                var y = Random.Range(_margin, Screen.height - (_margin * 5));
                 ActiveObject(Random.Range(0, 100) > bombDropProbability ? planets : bombs, new Vector3(x, y, 0));
                 var ratio = _timer / _totalTime;
                 var acceleration = Mathf.Max(ratio * ratio, 0.2f);
@@ -136,7 +138,7 @@ namespace LibUnity.Frontend
         private IEnumerator ShowResult()
         {
             yield return new WaitForSeconds(1);
-            _result?.Invoke(_totalScore > targetScore);
+            _result?.Invoke(_totalScore > targetScore, new EventInfo(_index, _totalScore, 0));
         }
 
         private void OnDisable()

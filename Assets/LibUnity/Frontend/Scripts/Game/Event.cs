@@ -34,10 +34,10 @@ namespace LibUnity.Frontend
             go.GetComponent<IEvent>().Initialize(index, ShowResult);
         }
 
-        private void ShowResult(bool isSuccess)
+        private void ShowResult(bool isSuccess, EventInfo eventInfo)
         {
             eventResultPopup.gameObject.SetActive(true);
-            eventResultPopup.Initialize(isSuccess, _eventInfo);
+            eventResultPopup.Initialize(isSuccess, eventInfo);
         }
     }
 }
