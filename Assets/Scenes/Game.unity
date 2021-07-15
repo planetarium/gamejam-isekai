@@ -444,6 +444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1303846564}
   - component: {fileID: 1303846565}
+  - component: {fileID: 1303846566}
   m_Layer: 0
   m_Name: SceneLoader
   m_TagString: Untagged
@@ -479,6 +480,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loading: {fileID: 537211375}
   fade: {fileID: 969323680}
+--- !u!81 &1303846566
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303846563}
+  m_Enabled: 1
 --- !u!1 &1926393562
 GameObject:
   m_ObjectHideFlags: 0
