@@ -404,7 +404,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219ecb29d61d46c69d1c3cf0577a307e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventText: {fileID: 89245973}
   events:
   - {fileID: 9129965251913407748, guid: 6918d172625cee04a9c24ebd62c53a60, type: 3}
   - {fileID: 78277084755699755, guid: 7992de18f49db1546972a9f76d18acc1, type: 3}
