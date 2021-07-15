@@ -26,8 +26,7 @@ namespace LibUnity.Frontend
             {
                 if (Game.IsStart)
                 {
-                    SceneLoader.Instnace.Unload("Title");
-                    SceneLoader.Instnace.Load("Prologue");
+                    SceneLoader.Instnace.ChangeScene("Title", "Prologue");
                     yield break;
                 }
                 

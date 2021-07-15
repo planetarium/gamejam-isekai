@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ namespace LibUnity.Frontend
         public static SceneLoader Instnace;
         
         [SerializeField] private Image loading;
+        [SerializeField] private Image fade;
 
         private void Awake()
         {
@@ -29,6 +31,7 @@ namespace LibUnity.Frontend
 
         private IEnumerator LoadScene(string sceneName, Action callback = null)
         {
+            fade.color = Color.black;
             loading.fillAmount = 0;
             var operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
             while (!operation.isDone)
@@ -38,6 +41,17 @@ namespace LibUnity.Frontend
             }
             loading.fillAmount = 0;
             callback?.Invoke();
+            fade.DOFade(0, 1);
+        }
+
+        public void ChangeScene(string unloadSceneName, string loadSceneName, Action callback = null)
+        {
+            fade.color = Color.clear;
+            fade.DOFade(1, 1).OnComplete(() =>
+            {
+                SceneManager.UnloadSceneAsync(unloadSceneName);
+                StartCoroutine(LoadScene(loadSceneName, callback));
+            });
         }
     }
 }

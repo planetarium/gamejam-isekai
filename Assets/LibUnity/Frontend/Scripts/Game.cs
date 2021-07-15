@@ -74,10 +74,8 @@ namespace LibUnity.Frontend
                 IsInitialized = true;
                 SceneLoader.Instnace.Load("Title");
             }
-            
         }
 
-  
         #endregion
 
         private IEnumerator CoLogin(Action<bool> callback)

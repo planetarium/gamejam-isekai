@@ -40,8 +40,7 @@ namespace LibUnity.Frontend
                     return;
                 }
                 
-                SceneLoader.Instnace.Unload("Lobby");
-                SceneLoader.Instnace.Load("Event", () =>
+                SceneLoader.Instnace.ChangeScene("Lobby", "Event", () =>
                 {
                     Event.Instance.Initialize(index, eventTheme.text);
                 });

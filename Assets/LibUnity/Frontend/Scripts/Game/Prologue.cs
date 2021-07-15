@@ -19,16 +19,15 @@ namespace LibUnity.Frontend
             _coroutine = StartCoroutine(TextTyper.Play(text, synopsis, typingSpeed, (isSuccess) =>
             {
                 _isDone = isSuccess;
-                SceneLoader.Instnace.Unload("Prologue");
-                SceneLoader.Instnace.Load("Lobby");
+                SceneLoader.Instnace.ChangeScene("Prologue", "Lobby");
+                
             }));
 
             skipButton.onClick.AddListener(() =>
             {
                 if (_isDone)
                 {
-                    SceneLoader.Instnace.Unload("Prologue");
-                    SceneLoader.Instnace.Load("Lobby");
+                    SceneLoader.Instnace.ChangeScene("Prologue", "Lobby");
                     return;
                 }
 

@@ -60,8 +60,7 @@ namespace LibUnity.Frontend
                 return;
             }
 
-            SceneLoader.Instnace.Unload("Story");
-            SceneLoader.Instnace.Load("Lobby");
+            SceneLoader.Instnace.ChangeScene("Story", "Lobby");
         }
 
         private void ActionRenderResult(bool isSuccess)

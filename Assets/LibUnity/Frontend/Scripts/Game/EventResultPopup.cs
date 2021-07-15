@@ -23,8 +23,7 @@ namespace LibUnity.Frontend
                 rewardsText.text = "50";
                 sendResultButton.onClick.AddListener(() =>
                 {
-                    SceneLoader.Instnace.Unload("Event");
-                    SceneLoader.Instnace.Load("Story",
+                    SceneLoader.Instnace.ChangeScene("Event", "Story",
                         () =>
                         {
                             Story.Instance.Initialize(eventInfo.Index,
@@ -37,8 +36,7 @@ namespace LibUnity.Frontend
                 rewardsText.text = "0";
                 sendResultButton.onClick.AddListener(() =>
                 {
-                    SceneLoader.Instnace.Unload("Event");
-                    SceneLoader.Instnace.Load("Lobby");
+                    SceneLoader.Instnace.ChangeScene("Event", "Lobby");
                 });
             }
         }
