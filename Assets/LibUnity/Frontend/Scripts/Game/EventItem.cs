@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using LibUnity.Backend.State;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using ObservableExtensions = UniRx.ObservableExtensions;
 
 namespace LibUnity.Frontend
 {
@@ -21,10 +23,18 @@ namespace LibUnity.Frontend
         private const float Gap = 20;
         private const float Revision = 150;
         private const int Cycle = 20;
+        private int _index;
 
         protected override void Awake()
         {
             button.onClick.AddListener(ShowStageInfoPopup);
+            ObservableExtensions.Subscribe(Game.Instance.Agent.BlockIndexSubject, SubscribeBlockIndex)
+                .AddTo(gameObject);
+        }
+
+        private void SubscribeBlockIndex(long blockIndex)
+        {
+            UpdateItem(_index);
         }
 
         private void ShowStageInfoPopup()
@@ -35,6 +45,7 @@ namespace LibUnity.Frontend
 
         public void UpdateItem(int index)
         {
+            _index = index;
             var temp = index % Cycle;
             background.transform.localScale = Vector3.one;
             if (temp > 9)

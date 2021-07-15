@@ -97,7 +97,6 @@ namespace LibUnity.Frontend
             }
 
             itemControllerLimited.Max = index;
-            infiniteScroll.Reset();
         }
 
         public bool TryGetLastHistory(int index, out StageState.StageHistory history)

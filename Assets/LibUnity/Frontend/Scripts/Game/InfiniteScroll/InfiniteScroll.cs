@@ -6,25 +6,18 @@ using System.Linq;
 
 public class InfiniteScroll : UIBehaviour
 {
-	[SerializeField]
-	private RectTransform itemPrototype;
-
-	[SerializeField, Range(0, 30)]
-	int instantateItemCount = 9;
-
-	[SerializeField]
-	private Direction direction;
+	[SerializeField] private RectTransform itemPrototype;
+	[SerializeField, Range(0, 30)] int instantateItemCount = 13;
+	[SerializeField] private Direction direction;
 
 	public OnItemPositionChange onUpdateItem = new OnItemPositionChange();
 
-	[System.NonSerialized]
-	public LinkedList<RectTransform> itemList = new LinkedList<RectTransform>();
+	[System.NonSerialized] private readonly LinkedList<RectTransform> itemList = new LinkedList<RectTransform>();
 
-	protected float diffPreFramePosition = 0;
+	private float diffPreFramePosition = 0;
+	private int currentItemNo = 0;
 
-	protected int currentItemNo = 0;
-
-	public enum Direction
+	private enum Direction
 	{
 		Vertical,
 		Horizontal,
@@ -57,25 +50,13 @@ public class InfiniteScroll : UIBehaviour
 		}
 	}
 
-	public void Reset()
+	protected override void Start()
 	{
-		Start();
-	}
-
-	protected override void Start ()
-	{
-		var controllers = GetComponents<MonoBehaviour>()
-				.Where(item => item is IInfiniteScrollSetup)
-				.Select(item => item as IInfiniteScrollSetup)
-				.ToList();
-
-		// create items
-
+		var controllers = GetComponents<MonoBehaviour>().OfType<IInfiniteScrollSetup>().ToList();
 		var scrollRect = GetComponentInParent<ScrollRect>();
 		scrollRect.horizontal = direction == Direction.Horizontal;
 		scrollRect.vertical = direction == Direction.Vertical;
 		scrollRect.content = rectTransform;
-
 		itemPrototype.gameObject.SetActive(false);
 		
 		for(int i = 0; i < instantateItemCount; i++) {
