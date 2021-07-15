@@ -68,13 +68,13 @@ namespace LibUnity.Frontend
 
         private IEnumerator FadeVolume(bool isIn)
         {
-            const float tick = 0.02f;
+            const float tick = 0.025f;
             if (isIn)
             {
                 AudioListener.volume = 0;
                 while (AudioListener.volume < 1)
                 {
-                    yield return new WaitForSeconds(tick);
+                    yield return new WaitForSeconds(0.1f);
                     AudioListener.volume += tick;
                 }
                 AudioListener.volume = 1;
