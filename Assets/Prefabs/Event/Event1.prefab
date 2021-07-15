@@ -1265,7 +1265,7 @@ MonoBehaviour:
   - {fileID: 9135416181890257511}
   - {fileID: 7664198364587244543}
   bombDropProbability: 10
-  targetScore: 500
+  targetScore: 300
   planetScore: 15
   bombScore: -50
 --- !u!82 &9205547407065202320
