@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Bencodex.Types;
-using Libplanet;
 using Libplanet.Assets;
 using LibUnity.Backend;
 using LibUnity.Backend.State;
@@ -21,6 +20,7 @@ namespace LibUnity.Frontend
         [SerializeField] private InfiniteScroll infiniteScroll;
         [SerializeField] private ItemControllerLimited itemControllerLimited;
         [SerializeField] private Text goldText;
+        [SerializeField] private Text messageText;
         
         private Currency _currency;
         
@@ -32,6 +32,7 @@ namespace LibUnity.Frontend
             Instance = this;
             UpdateList();
             UpdateBalance();
+            UpdateMessage(Game.Instance.Agent.BlockIndex);
             ObservableExtensions.Subscribe(Game.Instance.Agent.BlockIndexSubject, SubscribeBlockIndex)
                 .AddTo(gameObject);
         }
@@ -53,6 +54,7 @@ namespace LibUnity.Frontend
         {
             UpdateList();
             UpdateBalance();
+            UpdateMessage(blockIndex);
         }
 
         private void UpdateBalance()
@@ -65,6 +67,11 @@ namespace LibUnity.Frontend
 
             var balance = Game.Instance.Agent.GetBalance(address, _currency);
             goldText.text = balance.GetQuantityString();
+        }
+
+        private void UpdateMessage(long blockIndex)
+        {
+            messageText.text = $"{blockIndex} 블록 채굴중.. 10 블록마다 새 스테이지가 열립니다.";
         }
 
         private void UpdateList()

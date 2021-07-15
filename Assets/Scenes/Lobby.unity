@@ -620,6 +620,7 @@ MonoBehaviour:
   infiniteScroll: {fileID: 3709184887699528472}
   itemControllerLimited: {fileID: 3709184887699528471}
   goldText: {fileID: 261704705}
+  messageText: {fileID: 2142454002}
 --- !u!4 &1303576474
 Transform:
   m_ObjectHideFlags: 0
@@ -1351,9 +1352,8 @@ GameObject:
   - component: {fileID: 2142454002}
   - component: {fileID: 2142454001}
   - component: {fileID: 2142454000}
-  - component: {fileID: 2142454004}
   m_Layer: 5
-  m_Name: Text
+  m_Name: MessageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1375,8 +1375,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 575, y: -72}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 564, y: -79}
+  m_SizeDelta: {x: 800, y: 60}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2142454000
 MonoBehaviour:
@@ -1429,19 +1429,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: e1a8dc48bea81174f9efbbfdc604d6eb, type: 3}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 35c9c46ac12382b43af49cd25730c76c, type: 3}
+    m_FontSize: 30
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
-    m_MaxSize: 50
-    m_Alignment: 1
+    m_MaxSize: 300
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Excavating... A new stage opens every 10 blocks.
+  m_Text: "9999 \uBE14\uB85D \uCC44\uAD74\uC911.. 10 \uBE14\uB85D\uB9C8\uB2E4 \uC0C8
+    \uC2A4\uD14C\uC774\uC9C0\uAC00 \uC5F4\uB9BD\uB2C8\uB2E4."
 --- !u!222 &2142454003
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1450,20 +1451,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142453998}
   m_CullTransparentMesh: 1
---- !u!114 &2142454004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142453998}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalFit: 2
-  m_VerticalFit: 2
 --- !u!1001 &2969966152199700108
 PrefabInstance:
   m_ObjectHideFlags: 0
