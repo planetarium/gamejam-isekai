@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace LibUnity.Frontend
@@ -30,7 +28,9 @@ namespace LibUnity.Frontend
 
         private Coroutine _coroutine;
         private string _selectedStory;
+        private int _index;
         private bool _isDone;
+        private bool _isSuccess;
 
         private void Awake()
         {
@@ -40,6 +40,7 @@ namespace LibUnity.Frontend
         public void Initialize(int index, Action action = null)
         {
             action?.Invoke();
+            _index = index;
             _isDone = false;
             eventIndexText.text = (index + 1).ToString();
 
@@ -60,7 +61,10 @@ namespace LibUnity.Frontend
                 return;
             }
 
-            SceneLoader.Instnace.ChangeScene("Story", "Lobby");
+            SceneLoader.Instnace.ChangeScene("Story", "Lobby", () =>
+            {
+                Lobby.Instance.ShowActionResultPopup(_index, _isSuccess);
+            });
         }
 
         private void ActionRenderResult(bool isSuccess)
@@ -71,6 +75,7 @@ namespace LibUnity.Frontend
             }
 
             StopCoroutine(_coroutine);
+            _isSuccess = isSuccess;
             if (isSuccess)
             {
                 storyText.text = _selectedStory;

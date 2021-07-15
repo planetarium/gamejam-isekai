@@ -17,6 +17,7 @@ namespace LibUnity.Frontend
 
         [SerializeField] private Notification notification;
         [SerializeField] private EventInformationPopup eventInformationPopup;
+        [SerializeField] private ActionResultPopup actionResultPopup;
         [SerializeField] private InfiniteScroll infiniteScroll;
         [SerializeField] private ItemControllerLimited itemControllerLimited;
         [SerializeField] private Text goldText;
@@ -35,6 +36,12 @@ namespace LibUnity.Frontend
             UpdateMessage(Game.Instance.Agent.BlockIndex);
             ObservableExtensions.Subscribe(Game.Instance.Agent.BlockIndexSubject, SubscribeBlockIndex)
                 .AddTo(gameObject);
+        }
+
+        public void ShowActionResultPopup(int index, bool isSuccess)
+        {
+            actionResultPopup.gameObject.SetActive(true);
+            actionResultPopup.Initialize(index, isSuccess);
         }
 
         public void ShowStageInformation(int index)
