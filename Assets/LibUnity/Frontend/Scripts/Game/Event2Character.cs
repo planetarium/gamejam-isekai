@@ -6,17 +6,18 @@ namespace LibUnity.Frontend
 {
     public class Event2Character : MonoBehaviour
     {
-        private float _speed = 400;
-        private Vector2 _direction;
-        [SerializeField] private GameObject idle;
-        [SerializeField] private GameObject dead;
+        [SerializeField] private Animator animator;
         
+        private Vector2 _direction;
+        private float _speed = 400;
+        private static readonly int Idle = Animator.StringToHash("Idle");
+        private static readonly int Move = Animator.StringToHash("Move");
+        private static readonly int Dead = Animator.StringToHash("Dead");
+
         public bool IsDead { get; private set; }
 
         private void Awake()
         {
-            idle.SetActive(true);
-            dead.SetActive(false);
             IsDead = false;
         }
 
@@ -32,6 +33,7 @@ namespace LibUnity.Frontend
         {
             var inputMovement = value.Get<Vector2>();
             _direction = new Vector2(inputMovement.x, 0);
+            animator.SetTrigger(_direction.sqrMagnitude > 0f ? Move : Idle);
         }
         
         private void OnCollisionEnter2D(Collision2D other)
@@ -39,8 +41,7 @@ namespace LibUnity.Frontend
             if (other.collider.tag.Equals("Stone"))
             {
                 IsDead = true;
-                idle.SetActive(false);
-                dead.SetActive(true);
+                animator.SetTrigger(Dead);
                 transform.DOShakePosition(5,3, 50);
             }
         }
