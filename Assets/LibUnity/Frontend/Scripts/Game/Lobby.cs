@@ -101,7 +101,7 @@ namespace LibUnity.Frontend
             }
             
             var histories = _stageHistory[index];
-            conqueror = histories.Count > 0 ? histories.Last().AgentAddress.ToHex().Substring(0, 4) : string.Empty;
+            conqueror = histories.Count > 0 ? $"#{histories.Last().AgentAddress.ToHex().Substring(0, 4)}" : string.Empty;
             return histories.Count > 0;
         }
 

@@ -21,6 +21,8 @@ namespace LibUnity.Frontend
         public ActionManager ActionManager { get; private set; }
         public bool IsInitialized { get; private set; }
 
+        public static bool IsStart;
+
         private CommandLineOptions _options;
         
         public Story Story { get; set; }
@@ -32,6 +34,7 @@ namespace LibUnity.Frontend
 
         protected void Awake()
         {
+            Screen.SetResolution(540, 960, false);
             if (!IsValidInstance())
             {
                 return;
@@ -58,7 +61,6 @@ namespace LibUnity.Frontend
                         Debug.Log($"Agent initialized. {succeed}");
                         agentInitialized = true;
                         agentInitializeSucceed = succeed;
-                        SceneLoader.Instnace.Load("Prologue");
                     }
                 )
             );
@@ -70,8 +72,9 @@ namespace LibUnity.Frontend
             if (agentInitializeSucceed)
             {
                 IsInitialized = true;
+                SceneLoader.Instnace.Load("Title");
             }
-            ActionManager.SignUp();
+            
         }
 
   

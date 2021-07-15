@@ -41,8 +41,6 @@ namespace LibUnity.Frontend
                     SceneLoader.Instnace.Load("Lobby");
                 });
             }
-
-            // eventContentsText.text = isSuccess ? "점령성공!\n스토리 조각과 리워드를 획득했습니다" : "점령 실패!\n스토리 조각과 리워드를 획득에 실패했습니다";
         }
     }
 }

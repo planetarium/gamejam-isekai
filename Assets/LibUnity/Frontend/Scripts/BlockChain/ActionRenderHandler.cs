@@ -5,6 +5,7 @@ using LibUnity.Backend.Renderer;
 using LibUnity.Backend.State;
 using LibUnity.Frontend.Extensions;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace LibUnity.Frontend.BlockChain
 {
@@ -46,6 +47,7 @@ namespace LibUnity.Frontend.BlockChain
         private void RenderSignUp(BaseAction.ActionEvaluation<SignUp> eval)
         {
             var agent = eval.OutputStates.GetState(Game.Instance.Agent.Address);
+            Game.IsStart = true;
             Debug.Log($"[RenderSignUp] : {agent}");
         }
 

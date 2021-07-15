@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public static class TextTyper
 {
+    public static bool IsStart;
     public static bool IsRendered;
     public static bool IsSuccess;
 

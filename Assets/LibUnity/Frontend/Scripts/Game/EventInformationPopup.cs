@@ -15,8 +15,6 @@ namespace LibUnity.Frontend
         [SerializeField] private Button startButton;
         [SerializeField] private Button closeButton;
 
-        
-
         public void Initialize(int index, IEnumerable<StageState.StageHistory> histories)
         {
             eventIndexText.text = $"{index + 1}";
@@ -26,7 +24,7 @@ namespace LibUnity.Frontend
             {
                 var conquestBlockIndex = history.ConquestBlockIndex;
                 var address = history.AgentAddress.ToHex().Substring(0, 4);
-                sb.Append($"{conquestBlockIndex} 블록 : {address}가 {StageState.ConquestInterval}블록동안 점령\n");
+                sb.Append($"{conquestBlockIndex} 블록 : #{address}가 {StageState.ConquestInterval}블록동안 점령\n");
             }
             eventHistory.text = sb.ToString();
 
@@ -38,7 +36,7 @@ namespace LibUnity.Frontend
                 {
                     var name = histories.Last().AgentAddress.ToHex().Substring(0, 4);
                     // var standard = histories.Last().ConquestBlockIndex + StageState.ConquestInterval;
-                    Lobby.Instance.ShowNotification($"{name}가 점령하고 있습니다.");
+                    Lobby.Instance.ShowNotification($"#{name}가 점령하고 있습니다.");
                     return;
                 }
                 
