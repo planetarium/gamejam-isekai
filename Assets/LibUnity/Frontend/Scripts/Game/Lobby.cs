@@ -52,6 +52,13 @@ namespace LibUnity.Frontend
             }
 
             var histories = _stageHistory[index];
+            if (histories.Any() &&
+                histories.Last().ConquestBlockIndex + StageState.ConquestInterval> Game.Instance.Agent.BlockIndex)
+            {
+                var name = histories.Last().AgentAddress.ToHex().Substring(0, 4);
+                ShowNotification($"#{name}가 점령하고 있습니다.");
+                return;
+            }
 
             eventInformationPopup.gameObject.SetActive(true);
             eventInformationPopup.Initialize(index, _stageHistory[index]);
