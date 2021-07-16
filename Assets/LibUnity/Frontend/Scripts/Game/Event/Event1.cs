@@ -51,7 +51,7 @@ namespace LibUnity.Frontend
             _timer = _totalTime;
             _totalScore = 0;
             eventIndexText.text = (index + 1).ToString();
-            eventContentsText.text = $"별풍선을 터뜨려서 {targetScore}점 이상 달성하세요!!";
+            eventContentsText.text = $"별똥별을 터뜨려서 {targetScore}점 이상 달성하세요!!";
             timeText.text = _timer.ToString();
             scoreText.text = 0.ToString();
 
