@@ -12,7 +12,14 @@ namespace LibUnity.Frontend
 
         private void OnEnable()
         {
-            Game.Instance.ActionManager.SignUp();
+            if (Game.Instance.Agent.GetState(Game.Instance.Agent.Address) is null)
+            {
+                Game.Instance.ActionManager.SignUp();
+            }
+            else
+            {
+                Game.IsStart = true;
+            }
             StartCoroutine(SignUp());
         }
 
