@@ -1070,7 +1070,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 58.5
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -1644,7 +1644,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1.7, y: -8}
-  m_SizeDelta: {x: 200, y: 250}
+  m_SizeDelta: {x: 132, y: 199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1705822099813131635
 CanvasRenderer:
@@ -3834,16 +3834,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 3641614866538814639}
     m_Modifications:
     - target: {fileID: 2271055861924017242, guid: 9b15d652ed2cf7e4cb9ad856475c78df, type: 3}
+      propertyPath: m_Bounds.m_Center.x
+      value: -0.059698313
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271055861924017242, guid: 9b15d652ed2cf7e4cb9ad856475c78df, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.01951769
+      value: 0.019548208
       objectReference: {fileID: 0}
     - target: {fileID: 2271055861924017242, guid: 9b15d652ed2cf7e4cb9ad856475c78df, type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.34510309
+      value: 0.34507257
       objectReference: {fileID: 0}
     - target: {fileID: 2271055861924017242, guid: 9b15d652ed2cf7e4cb9ad856475c78df, type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 0.4864513
+      value: 0.48648182
       objectReference: {fileID: 0}
     - target: {fileID: 2287894601865345141, guid: 9b15d652ed2cf7e4cb9ad856475c78df, type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -3851,7 +3855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2287894601865345141, guid: 9b15d652ed2cf7e4cb9ad856475c78df, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.0053249
+      value: -0.005263865
       objectReference: {fileID: 0}
     - target: {fileID: 2287894601865345141, guid: 9b15d652ed2cf7e4cb9ad856475c78df, type: 3}
       propertyPath: m_Bounds.m_Extent.x
@@ -3867,7 +3871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3517336830019014162, guid: 9b15d652ed2cf7e4cb9ad856475c78df, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.05352956
+      value: -0.05340749
       objectReference: {fileID: 0}
     - target: {fileID: 3517336830019014162, guid: 9b15d652ed2cf7e4cb9ad856475c78df, type: 3}
       propertyPath: m_Bounds.m_Extent.x
