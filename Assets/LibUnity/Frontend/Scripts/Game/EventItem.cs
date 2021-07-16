@@ -16,6 +16,7 @@ namespace LibUnity.Frontend
         [SerializeField] private Image background;
         [SerializeField] private GameObject conquerorIcon;
         [SerializeField] private GameObject withConquerorIcon;
+        [SerializeField] private GameObject lockIcon;
         [SerializeField] private GameObject emptyIcon;
         [SerializeField] private List<Sprite> map;
 
@@ -56,36 +57,52 @@ namespace LibUnity.Frontend
 
             background.sprite = map[temp];
             stageText.text = (index + 1).ToString();
-
-            Color color;
-            if (Lobby.Instance.TryGetLastHistory(index, out var history))
+            if (index > 8)
             {
-                if (history.ConquestBlockIndex + StageState.ConquestInterval > Game.Instance.Agent.BlockIndex)
+                lockIcon.SetActive(true);
+                withConquerorIcon.SetActive(false);
+                emptyIcon.SetActive(false);
+                conquerorIcon.SetActive(false);
+                stageText.enabled = false;
+                conquerorText.enabled = false;
+            }
+            else
+            {
+                lockIcon.SetActive(false);
+                stageText.enabled = true;
+                conquerorText.enabled = true;
+                Color color;
+                if (Lobby.Instance.TryGetLastHistory(index, out var history))
                 {
-                    ColorUtility.TryParseHtmlString("#580004", out color);    
-                    withConquerorIcon.SetActive(true);
-                    emptyIcon.SetActive(false);
+                    if (history.ConquestBlockIndex + StageState.ConquestInterval > Game.Instance.Agent.BlockIndex)
+                    {
+                        ColorUtility.TryParseHtmlString("#580004", out color);    
+                        withConquerorIcon.SetActive(true);
+                        emptyIcon.SetActive(false);
+                    }
+                    else
+                    {
+                        ColorUtility.TryParseHtmlString("#060b3d", out color);
+                        withConquerorIcon.SetActive(false);
+                        emptyIcon.SetActive(true);
+                    }
+
+                    var address = history.AgentAddress.ToHex().Substring(0, 4);
+                    conquerorText.text = $"#{address}";
+                    conquerorIcon.SetActive(true);
                 }
                 else
                 {
                     ColorUtility.TryParseHtmlString("#060b3d", out color);
+                    conquerorText.text = string.Empty;
                     withConquerorIcon.SetActive(false);
                     emptyIcon.SetActive(true);
+                    conquerorIcon.SetActive(false);
                 }
+                conquerorText.GetComponent<Outline>().effectColor = color;
+            }
 
-                var address = history.AgentAddress.ToHex().Substring(0, 4);
-                conquerorText.text = $"#{address}";
-                conquerorIcon.SetActive(true);
-            }
-            else
-            {
-                ColorUtility.TryParseHtmlString("#060b3d", out color);
-                conquerorText.text = string.Empty;
-                withConquerorIcon.SetActive(false);
-                emptyIcon.SetActive(true);
-                conquerorIcon.SetActive(false);
-            }
-            conquerorText.GetComponent<Outline>().effectColor = color;
+
             var value = Mathf.Sin(Degree * index * Mathf.Deg2Rad);
             var x = (Mathf.Abs(value) * Gap * Gap) - Revision;
             button.transform.localPosition = new Vector2(x, button.transform.localPosition.y);

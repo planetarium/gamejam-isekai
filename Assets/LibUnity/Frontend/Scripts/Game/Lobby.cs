@@ -51,6 +51,12 @@ namespace LibUnity.Frontend
                 return;
             }
 
+            if (index > 8)
+            {
+                ShowNotification($"이벤트가 등록되어 있지 않습니다.\n신인류가 도전할 새로운 이벤트를 등록해주세요.");
+                return;
+            }
+
             var histories = _stageHistory[index];
             if (histories.Any() &&
                 histories.Last().ConquestBlockIndex + StageState.ConquestInterval> Game.Instance.Agent.BlockIndex)
