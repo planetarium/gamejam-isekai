@@ -34,10 +34,10 @@ RectTransform:
   m_Father: {fileID: 4135836197036749751}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 600, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2284708826710389173
 CanvasRenderer:
@@ -71,13 +71,13 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 35c9c46ac12382b43af49cd25730c76c, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
-    m_MaxSize: 40
-    m_Alignment: 1
+    m_MaxSize: 36
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
@@ -130,7 +130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -71.2, y: -23.5}
+  m_AnchoredPosition: {x: -71.2, y: -32.3}
   m_SizeDelta: {x: 62, y: 83}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &4134110483863702468
@@ -183,7 +183,6 @@ GameObject:
   - component: {fileID: 8272676063740655268}
   - component: {fileID: 4277336843558610341}
   - component: {fileID: 7518528246031573090}
-  - component: {fileID: 3745929164518600723}
   - component: {fileID: 2235120099936329878}
   m_Layer: 5
   m_Name: Notification
@@ -191,7 +190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4135836197036749751
 RectTransform:
   m_ObjectHideFlags: 0
@@ -264,32 +263,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _message: {fileID: 1809916862752413398}
   audioSource: {fileID: 2235120099936329878}
---- !u!114 &3745929164518600723
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8122782278231809484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!82 &2235120099936329878
 AudioSource:
   m_ObjectHideFlags: 0
