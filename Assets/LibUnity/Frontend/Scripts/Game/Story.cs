@@ -20,6 +20,7 @@ namespace LibUnity.Frontend
         [SerializeField] private Text storyTitleText;
         [SerializeField] private Text storyText;
         [SerializeField] private Text progressText;
+        [SerializeField] private Text completeText;
         [SerializeField] private Slider progressBar;
         [SerializeField] private List<StoryInfo> story = new List<StoryInfo>();
         [SerializeField] private float typingPlaySpeed = 0.1f;
@@ -35,6 +36,7 @@ namespace LibUnity.Frontend
         private void Awake()
         {
             Instance = this;
+            completeText.gameObject.SetActive(false);
         }
 
         public void Initialize(int index, Action action = null)
@@ -88,6 +90,8 @@ namespace LibUnity.Frontend
                     currentWrittenStory, typingRewindSpeed,
                     progressBar, progressText, (isSuccess) => { _isDone = true; }));
             }
+            completeText.gameObject.SetActive(isSuccess);
+            progressText.gameObject.SetActive(!isSuccess);
         }
     }
 }
