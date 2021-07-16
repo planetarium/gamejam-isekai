@@ -21,7 +21,7 @@ namespace LibUnity.Frontend
 
         private const float Degree = 18;
         private const float Gap = 20;
-        private const float Revision = 150;
+        private const float Revision = 250;
         private const int Cycle = 20;
         private int _index;
 
