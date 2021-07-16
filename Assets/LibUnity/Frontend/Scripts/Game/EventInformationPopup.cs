@@ -9,16 +9,18 @@ namespace LibUnity.Frontend
 {
     public class EventInformationPopup : MonoBehaviour
     {
+        [SerializeField] private GameObject firstEventContainer;
+        [SerializeField] private GameObject secondEventContainer;
         [SerializeField] private Text eventIndexText;
-        [SerializeField] private Text eventTheme;
         [SerializeField] private Text eventHistory;
         [SerializeField] private Button startButton;
         [SerializeField] private Button closeButton;
 
         public void Initialize(int index, IEnumerable<StageState.StageHistory> histories)
         {
+            firstEventContainer.SetActive(index % 2 == 0);
+            secondEventContainer.SetActive(index % 2 == 1);
             eventIndexText.text = $"{index + 1}";
-            eventTheme.text = $"별똥별 터뜨리기";
             var sb = new StringBuilder();
             foreach (var history in histories)
             {
@@ -32,7 +34,7 @@ namespace LibUnity.Frontend
             {
                 SceneLoader.Instnace.ChangeScene("Lobby", "Event", () =>
                 {
-                    Event.Instance.Initialize(index, eventTheme.text);
+                    Event.Instance.Initialize(index);
                 });
             });
 

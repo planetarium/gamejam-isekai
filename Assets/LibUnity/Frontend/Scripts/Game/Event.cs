@@ -11,7 +11,6 @@ namespace LibUnity.Frontend
         [SerializeField] private List<GameObject> events = new List<GameObject>();
         [SerializeField] private EventResultPopup eventResultPopup;
 
-        private (int, string) _eventInfo;
         
         private void Awake()
         {
@@ -19,9 +18,8 @@ namespace LibUnity.Frontend
         }
 
         
-        public void Initialize(int index, string contents)
+        public void Initialize(int index)
         {
-            _eventInfo = (index, contents);
             LoadStage(index);
         }
 
