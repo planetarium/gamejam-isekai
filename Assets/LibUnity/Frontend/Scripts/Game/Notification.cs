@@ -7,6 +7,7 @@ namespace LibUnity.Frontend
     public class Notification : MonoBehaviour
     {
         [SerializeField] private Text _message;
+        [SerializeField] private AudioSource audioSource;
         private Color _color;
 
         private void Awake()
@@ -16,6 +17,7 @@ namespace LibUnity.Frontend
 
         public void Show(string message)
         {
+            audioSource.Play();
             _message.DOKill();
             _message.text = message;
             _message.color = _color;
